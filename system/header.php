@@ -268,6 +268,7 @@ if (!isset($_SESSION['loggedin'])) {
 										}
 									}
 								});
+								// 
 								$.each(res, function(indexInArray, valueOfElement) {
 									var username = valueOfElement.username == "admin" ? '<span class="badge badge-dark w-100">admin</span>' : '<span class="badge badge-info w-100">' + valueOfElement.username + '</span>';
 									html +=
