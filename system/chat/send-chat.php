@@ -1,0 +1,94 @@
+<?php
+require_once('../../connect.php');
+$chat_to = $_POST['chat-from'];
+$chat = $_POST['chat-edit'];
+$query = $con->prepare("INSERT into chat_detail(id_chat_from,id_chat_to,chat) values('admin','$chat_to','$chat')");
+$query->execute();
+$query = $con->prepare("UPDATE chat set is_baca_admin = 0, created_at=date('Y-m-d H:i:s') where username = '$chat_to' ");
+$query->execute();
+$query = $con->prepare("UPDATE chat set is_baca_user = 1, created_at=date('Y-m-d H:i:s') where username = '$chat_to'");
+$query->execute();
+
+
+
+//Import PHPMailer classes into the global namespace
+use PHPMailer\PHPMailer\PHPMailer;
+
+// require 'phpmailer/vendor/autoload.php';
+require '../../phpmailer/vendor/autoload.php';
+
+//Create a new PHPMailer instance
+$mail = new PHPMailer;
+
+//Tell PHPMailer to use SMTP
+$mail->isSMTP();
+$mail->isHTML(true);
+
+//Enable SMTP debugging
+// 0 = off (for production use)
+// 1 = client messages
+// 2 = client and server messages
+$mail->SMTPDebug = 0;
+
+//Ask for HTML-friendly debug output
+$mail->Debugoutput = 'html';
+
+//Set the hostname of the mail server
+$mail->Host = 'smtp.gmail.com';
+// use
+// $mail->Host = gethostbyname('smtp.gmail.com');
+// if your network does not support SMTP over IPv6
+
+//Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
+$mail->Port = 465;
+
+//Set the encryption system to use - ssl (deprecated) or tls
+$mail->SMTPSecure = 'ssl';
+
+//Whether to use SMTP authentication
+$mail->SMTPAuth = true;
+
+//Username to use for SMTP authentication - use full email address for gmail
+$mail->Username = "ababil.transs@gmail.com";
+
+//Password to use for SMTP authentication
+$mail->Password = "ababiltrans2013";
+
+//Set who the message is to be sent from
+$mail->setFrom('ababil.transs@gmail.com', 'Admin');
+
+//Set an alternative reply-to address
+// $mail->addReplyTo('mzq100m@gmail.com', 'First Last');
+
+$query = $con->query("select * from pelanggan where pelanggan='$chat_to' ");
+$data = $query->fetch_assoc();
+//Set who the message is to be sent to
+$mail->addAddress($data['email']);
+
+//Set the subject line
+$mail->Subject = 'Chat';
+
+// Mail Body
+
+
+$root  = "http://" . $_SERVER['HTTP_HOST'];
+$root .= str_replace('chat/' . basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
+$mail->Body = 'chat : ' . $chat . '<br><a href="' . $root . '">Klik disini untuk membalas chat</a>';
+//Read an HTML message body from an external file, convert referenced images to embedded,
+//convert HTML into a basic plain-text alternative body
+// $mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
+
+//Replace the plain text body with one created manually
+$mail->AltBody = '';
+
+//Attach an image file
+// $mail->addAttachment('images/phpmailer_mini.png');
+
+echo $root;
+
+//send the message, check for errors
+if (!$mail->send()) {
+    echo "Mailer Error: " . $mail->ErrorInfo;
+} else {
+    echo "Message sent!";
+}
