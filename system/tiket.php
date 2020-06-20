@@ -95,7 +95,7 @@ if (isset($_GET['hapus'])) {
 													`alamatdari`,
 													`alamatke`,
 													`tgl_berangkat`,
-													`biaya`,
+													(`biaya`*`jml_tiket`) as biaya,
 													`status`
 												FROM pemesanan 
 												INNER JOIN pelanggan ON pemesanan.id_pelanggan = pelanggan.id_pelanggan 
@@ -118,7 +118,7 @@ if (isset($_GET['hapus'])) {
 													`alamatdari`,
 													`alamatke`,
 													`tgl_berangkat`,
-													`biaya`,
+													(`biaya`*`jml_tiket`) as biaya,
 													`status`
 												FROM pemesanan 
 												INNER JOIN pelanggan ON pemesanan.id_pelanggan = pelanggan.id_pelanggan 

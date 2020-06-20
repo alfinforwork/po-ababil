@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $alamat_dari = $_POST['alamat_dari'];
     $alamat_ke = $_POST['alamat_ke'];
     $biaya = $_POST['biaya'];
-    $query = $con->query("select * from biaya where id_lokasi_dari='$alamat_dari' and id_lokasi_ke='$alamat_ke'");
+    $query = $con->query("select * from biaya where id_lokasi_dari='$alamat_dari' and id_lokasi_ke='$alamat_ke' and biaya.remove=1");
     $data = [];
     while ($key = $query->fetch_assoc()) {
         $data[] = $key;
@@ -58,9 +58,9 @@ $root .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAM
                                     <div class="form-group row">
                                         <label class="col-md-3 form-control-label" for="alamat_ke">Alamat ke</label>
                                         <div class="col-md">
-                                            <select name="alamat_ke" class="form-control" id="alamat_ke" required>
+                                            <select name="alamat_ke" class="form-control" id="alamat_ke" required disabled>
                                                 <option value="0"> Pilih alamat ke </option>
-                                                <?php $query = $con->query("select * from alamat");
+                                                <?php $query = $con->query("select * from alamat where remove=1");
                                                 while ($key = $query->fetch_assoc()) { ?>
                                                     <option value="<?= $key['id_alamat'] ?>"><?= $key['nama_lokasi'] ?></option>
                                                 <?php } ?>
@@ -98,6 +98,11 @@ $root .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAM
     <script src="js/axios.min.js"></script>
     <script>
         $('#alamat_dari').change(function() {
+            if ($('#alamat_dari').val() != '' || $('#alamat_dari').val() != 0) {
+                $('#alamat_ke').attr('disabled', false)
+            } else {
+                $('#alamat_ke').attr('disabled', true)
+            }
             var id = $(this).val();
             var html = '';
             axios.get("<?= $root ?>api-lokasi.php?id=" + id).then(function(response) {

@@ -6,10 +6,9 @@ require_once('header.php');
 $id = $_GET['id'];
 
 if (isset($_POST['editTiket'])) {
-	$alamatpenjemputan = $_POST['alamatpenjemputan'];
-	$alamattujuan = $_POST['alamattujuan'];
-	$stmt = $con->prepare('UPDATE pemesanan SET alamat_lengkap_dari=?,alamat_lengkap_ke=? WHERE kd_pemesanan=?');
-	$stmt->bind_param('ssi', $alamatpenjemputan, $alamattujuan, $id);
+	$status		= $_POST['status'];
+	$stmt = $con->prepare('UPDATE pemesanan SET status=? WHERE kd_pemesanan=?');
+	$stmt->bind_param('si', $status, $id);
 
 
 
@@ -62,7 +61,8 @@ $stmt = $con->prepare(
 		`waktu`,
 		`status` ,
 		`alamat_lengkap_dari`,
-		`alamat_lengkap_ke`
+		`alamat_lengkap_ke`,
+		(`biaya`*`jml_tiket`)
 	FROM (SELECT @nomor:=1) as nomor, pemesanan 
 	INNER JOIN pelanggan ON pemesanan.id_pelanggan = pelanggan.id_pelanggan 
 	INNER JOIN (
@@ -80,7 +80,7 @@ $stmt = $con->prepare(
 $stmt->bind_param('i', $id);
 $stmt->execute();
 $stmt->store_result();
-$stmt->bind_result($tgl_berangkat, $jml_tiket, $no_kursi, $bukti_transfer, $tmp_jemput, $tmp_tujuan, $waktu, $status, $alamat_spesifik_dari, $alamat_spesifik_ke);
+$stmt->bind_result($tgl_berangkat, $jml_tiket, $no_kursi, $bukti_transfer, $tmp_jemput, $tmp_tujuan, $waktu, $status, $alamat_spesifik_dari, $alamat_spesifik_ke, $biaya);
 $stmt->fetch();
 ?>
 
@@ -231,6 +231,14 @@ $stmt->fetch();
 											<input type="text" max="8" name="alamattujuan" class="form-control" value="<?= $alamat_spesifik_ke ?>" readonly required>
 										</div>
 									</div>
+
+									<div class="line"></div>
+									<div class="form-group row">
+										<label class="col-md-3 form-control-label">Biaya</label>
+										<div class="col-md-8">
+											<input type="text" max="8" name="biaya" class="form-control" value="<?= $biaya ?>" readonly required>
+										</div>
+									</div>
 									<div class="line"></div>
 									<?php
 									if ($_SESSION['level'] == 'admin') {
@@ -278,7 +286,7 @@ $stmt->fetch();
 											}
 											if ($_SESSION['level'] == 'admin') {
 												echo '
-											<!--<button type="submit" name="editTiket" class="btn btn-primary">Save</button>-->
+											<button type="submit" name="editTiket" class="btn btn-primary">Save</button>
 											<a href="tiket.php" class="btn btn-secondary">Back</a>';
 												if (empty($bukti_transfer)) {
 													echo " Belum upload bukti transfer";

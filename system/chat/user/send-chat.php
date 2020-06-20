@@ -1,11 +1,13 @@
 <?php
 require_once('../../../connect.php');
 session_start();
+// $email = 'alfinforwork@gmail.com';
 $email = $_SESSION['email'];
 $query = $con->query("select * from pelanggan where email='$email' ");
 $data = $query->fetch_assoc();
 
 $chat_from = $data['pelanggan'];
+// $chat = 'nyapo';
 $chat = $_POST['chat-edit'];
 $query = $con->prepare("INSERT into chat_detail(id_chat_from,id_chat_to,chat) values('$chat_from','admin','$chat')");
 $query->execute();
@@ -36,7 +38,7 @@ $mail->isHTML(true);
 // 0 = off (for production use)
 // 1 = client messages
 // 2 = client and server messages
-$mail->SMTPDebug = 0;
+$mail->SMTPDebug = 2;
 
 //Ask for HTML-friendly debug output
 $mail->Debugoutput = 'html';
@@ -49,18 +51,22 @@ $mail->Host = 'smtp.gmail.com';
 
 //Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
 $mail->Port = 465;
+// $mail->Port = 587;
 
 //Set the encryption system to use - ssl (deprecated) or tls
 $mail->SMTPSecure = 'ssl';
+// $mail->SMTPSecure = 'tls';
 
 //Whether to use SMTP authentication
 $mail->SMTPAuth = true;
 
 //Username to use for SMTP authentication - use full email address for gmail
 $mail->Username = "ababil.transs@gmail.com";
+// $mail->Username = "kompisonlinecenter@gmail.com";
 
 //Password to use for SMTP authentication
 $mail->Password = "ababiltrans2013";
+// $mail->Password = "bersyukur";
 
 //Set who the message is to be sent from
 $mail->setFrom($email, $data['pelanggan']);

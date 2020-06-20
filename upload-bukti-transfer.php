@@ -75,7 +75,7 @@
 						$stmt->fetch();
 					}
 					if (!empty($_GET['id'])) {
-						$stmt = $con->prepare('SELECT biaya, tgl_berangkat, kd_pemesanan, dibuat_tanggal FROM pemesanan
+						$stmt = $con->prepare('SELECT (jml_tiket*biaya) as biaya, tgl_berangkat, kd_pemesanan, dibuat_tanggal FROM pemesanan
 								JOIN biaya on pemesanan.id_biaya = biaya.id_biaya
 								WHERE kd_pemesanan = ?
 								LIMIT 1');
