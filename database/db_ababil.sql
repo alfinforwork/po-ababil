@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2020 at 02:52 PM
+-- Generation Time: Jun 21, 2020 at 12:40 PM
 -- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.2
+-- PHP Version: 7.3.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -86,10 +85,10 @@ CREATE TABLE `biaya` (
 
 INSERT INTO `biaya` (`id_biaya`, `id_lokasi_dari`, `id_lokasi_ke`, `biaya`, `remove`, `created_at`, `updated_at`) VALUES
 (12, 3, 4, 1000000000000, 1, '2020-06-01 08:55:57', '2020-06-01 12:57:06'),
-(13, 5, 6, 213421, 1, '2020-06-01 08:56:06', '2020-06-01 08:56:06'),
-(14, 5, 3, 21324, 1, '2020-06-01 12:26:06', '2020-06-01 12:26:06'),
-(15, 4, 6, 214234, 1, '2020-06-01 12:26:16', '2020-06-01 12:26:16'),
-(17, 5, 4, 1000000000000, 1, '2020-06-01 13:10:44', '2020-06-01 13:10:44');
+(13, 5, 6, 213421, 1, '2020-06-01 08:56:06', '2020-06-20 12:01:58'),
+(14, 5, 3, 21324, 1, '2020-06-01 12:26:06', '2020-06-20 12:01:59'),
+(15, 4, 6, 214234, 1, '2020-06-01 12:26:16', '2020-06-20 12:01:59'),
+(17, 5, 4, 1000000000000, 1, '2020-06-01 13:10:44', '2020-06-20 12:02:00');
 
 -- --------------------------------------------------------
 
@@ -111,9 +110,9 @@ CREATE TABLE `chat` (
 
 INSERT INTO `chat` (`id`, `username`, `created_at`, `is_baca_admin`, `is_baca_user`) VALUES
 (9, 'admin', '2020-04-06 12:52:11', 1, 1),
-(67, 'alfinforwork', '2020-04-26 11:42:53', 0, 1),
+(67, 'alfinforwork', '2020-06-20 13:52:34', 0, 1),
 (68, 'pelanggan', '2020-05-05 13:17:14', 1, 0),
-(69, '', '2020-05-05 08:34:16', 1, 1);
+(69, '', '2020-06-20 12:49:23', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -128,24 +127,6 @@ CREATE TABLE `chat_detail` (
   `chat` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `chat_detail`
---
-
-INSERT INTO `chat_detail` (`id_chat_detail`, `id_chat_from`, `id_chat_to`, `chat`, `created_at`) VALUES
-(31, 'alfinforwork', 'admin', 'hello', '2020-04-26 11:39:48'),
-(32, 'admin', 'alfinforwork', 'iya', '2020-04-26 11:40:26'),
-(33, 'alfinforwork', 'admin', 'iya lah', '2020-04-26 11:40:33'),
-(34, 'admin', 'alfinforwork', 'iya', '2020-04-26 11:42:13'),
-(35, 'alfinforwork', 'admin', 'yoi', '2020-04-26 11:42:25'),
-(36, 'alfinforwork', 'admin', 'tes', '2020-04-26 11:42:40'),
-(37, 'admin', 'alfinforwork', 'yes', '2020-04-26 11:42:53'),
-(39, 'admin', 'pelanggan', 'iya', '2020-05-05 12:54:43'),
-(41, 'admin', 'pelanggan', 'gpp hehe', '2020-05-05 12:55:03'),
-(42, 'admin', 'pelanggan', 'tes', '2020-05-05 13:04:06'),
-(43, 'admin', 'pelanggan', 'ya loo', '2020-05-05 13:04:14'),
-(46, 'admin', 'pelanggan', 'yoo', '2020-05-05 13:10:51');
 
 -- --------------------------------------------------------
 
@@ -186,7 +167,8 @@ CREATE TABLE `lokasi` (
 
 INSERT INTO `lokasi` (`id_sopir`, `id_mobil`, `latitude`, `longitude`) VALUES
 (8, 0, '-7.150975', '110.14025934999'),
-(9, 40, '-7.150975', '110.14025939999999');
+(9, 0, '-7.150975', '110.14025939999999'),
+(10, 40, '-7.5360639', '112.2384017');
 
 -- --------------------------------------------------------
 
@@ -230,6 +212,7 @@ CREATE TABLE `password_reset` (
 
 CREATE TABLE `pelanggan` (
   `id_pelanggan` int(10) NOT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
   `pelanggan` varchar(200) DEFAULT NULL,
   `email` varchar(200) DEFAULT NULL,
   `password` varchar(250) DEFAULT NULL,
@@ -244,15 +227,15 @@ CREATE TABLE `pelanggan` (
 -- Dumping data for table `pelanggan`
 --
 
-INSERT INTO `pelanggan` (`id_pelanggan`, `pelanggan`, `email`, `password`, `tmp_lahir`, `tgl_lahir`, `alamat`, `hp`, `is_online`) VALUES
-(21, 'pelanggan', 'pelanggan@gmail.com', '$2y$10$hXNFSb4U3UwlpEMEKKSjpOtiEuw8VanutwtcMhg0nQdmPpgQHaYju', 'pekalongan', '2020-03-03', 'bojong', '08222223333', 0),
-(22, 'aku', 'aku@gmail.com', '$2y$10$hXNFSb4U3UwlpEMEKKSjpOtiEuw8VanutwtcMhg0nQdmPpgQHaYju', 'batang', '2020-03-09', 'sumurjomblangbogo', '088888888888', 0),
-(23, 'alfinforwork', 'alfinforwork@gmail.com', '$2y$10$hXNFSb4U3UwlpEMEKKSjpOtiEuw8VanutwtcMhg0nQdmPpgQHaYju', 'mbuh', '2020-04-21', 'raruh', '982932892', 1),
-(24, 'Jono', NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(25, 'Mamat', NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(26, 'Eza', NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(27, 'Elfa', NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(28, 'meymey', NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `pelanggan` (`id_pelanggan`, `avatar`, `pelanggan`, `email`, `password`, `tmp_lahir`, `tgl_lahir`, `alamat`, `hp`, `is_online`) VALUES
+(21, 'pop 1.png', 'pelanggan', 'pelanggan@gmail.com', '$2y$10$hXNFSb4U3UwlpEMEKKSjpOtiEuw8VanutwtcMhg0nQdmPpgQHaYju', 'pekalongan', '2020-03-03', 'bojong', '08222223333', 1),
+(22, NULL, 'aku', 'aku@gmail.com', '$2y$10$hXNFSb4U3UwlpEMEKKSjpOtiEuw8VanutwtcMhg0nQdmPpgQHaYju', 'batang', '2020-03-09', 'sumurjomblangbogo', '088888888888', 0),
+(23, NULL, 'alfinforwork', 'alfinforwork@gmail.com', '$2y$10$hXNFSb4U3UwlpEMEKKSjpOtiEuw8VanutwtcMhg0nQdmPpgQHaYju', 'mbuh', '2020-04-21', 'raruh', '982932892', 0),
+(24, NULL, 'Jono', NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(25, NULL, 'Mamat', NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(26, NULL, 'Eza', NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(27, NULL, 'Elfa', NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(28, NULL, 'meymey', NULL, NULL, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -281,7 +264,7 @@ CREATE TABLE `pemesanan` (
 --
 
 INSERT INTO `pemesanan` (`kd_pemesanan`, `tgl_berangkat`, `jml_tiket`, `no_kursi`, `id_biaya`, `alamat_lengkap_dari`, `alamat_lengkap_ke`, `bukti_transfer`, `status`, `waktu`, `id_pelanggan`, `expired`, `dibuat_tanggal`) VALUES
-(59, '2020-06-14', 1, '1,', 12, 'bekasi timur', 'jakarta barat', NULL, 'belum dibayar', 'pagi', 21, 1, '2020-06-13 12:44:43');
+(61, '2020-06-21', 4, '1,2,3,4,', 15, 'bekasi timur', 'bekasi', 'bukti_transfer/8dcca41917d2bac60bfeeda335941ca8.jpg', 'sudah dibayar', 'pagi', 21, 1, '2020-06-20 14:04:51');
 
 -- --------------------------------------------------------
 
@@ -481,7 +464,7 @@ ALTER TABLE `chat`
 -- AUTO_INCREMENT for table `chat_detail`
 --
 ALTER TABLE `chat_detail`
-  MODIFY `id_chat_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_chat_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT for table `jadwal`
@@ -511,7 +494,7 @@ ALTER TABLE `pelanggan`
 -- AUTO_INCREMENT for table `pemesanan`
 --
 ALTER TABLE `pemesanan`
-  MODIFY `kd_pemesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `kd_pemesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `pesan`
