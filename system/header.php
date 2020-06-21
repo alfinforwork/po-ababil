@@ -93,7 +93,16 @@ if (!isset($_SESSION['loggedin'])) {
 				<?php } ?>
 				<li class="nav-item dropdown ml-auto">
 					<a id="userInfo" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
-						<img src="img/avatar-6.jpg" alt="Jason Doe" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow">
+						<?php
+						$id = $_SESSION['id'];
+						$stmt = $con->prepare('SELECT avatar FROM pelanggan WHERE id_pelanggan = ? LIMIT 1');
+						$stmt->bind_param('i', $id);
+						$stmt->execute();
+						$stmt->store_result();
+						$stmt->bind_result($avatar);
+						$stmt->fetch();
+						?>
+						<img src="<?= !empty($avatar) ? "../avatar/$avatar" : 'img/avatar-6.jpg'  ?>" alt="Jason Doe" style="width: 2.5rem;height: 2.5rem;" class="img-fluid rounded-circle shadow">
 					</a>
 					<div aria-labelledby="userInfo" class="dropdown-menu">
 						<a href="#" class="dropdown-item">
