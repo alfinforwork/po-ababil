@@ -59,10 +59,9 @@
 		if ($datanotif->transaction_status == "settlement" && $query->status == 'belum dibayar') {
 			header("Location:upload-bukti-transfer-selesai.php?id=$kd_pembayaran");
 		}
-	}
-
-	if ($datanotif->transaction_status == "settlement" && $query->status == 'sudah bayar') {
-		header("Location:system/tiket.php");
+		if ($datanotif->transaction_status == "settlement" && $query->status == 'sudah bayar') {
+			header("Location:system/tiket.php");
+		}
 	}
 
 
@@ -213,6 +212,13 @@
 						<div class="col-md-2" style="display: flex;justify-content: center;padding-top: 5%">
 							<img src="images/rek.png" style="align-items: center;width: 94px;height:94px">
 						</div>
+						<?php
+
+						echo "<pre>";
+						print_r(@$datanotif);
+						echo "</pre>";
+
+						?>
 						<?php if (isset($datanotif)) { ?>
 							<div class="col-md-6">
 								<table class="table table-sm my-4 mx-auto col-md-5 bg-blue">

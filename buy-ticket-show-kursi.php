@@ -1,4 +1,6 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
 include 'connect.php';
 $waktu = $_GET['waktu'];
 $tanggal = $_GET['tanggal'];
