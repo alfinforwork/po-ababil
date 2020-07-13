@@ -303,7 +303,13 @@
 									</script> -->
 									<tr>
 										<td class="font-weight-bold">Status Transaksi</td>
-										<td><?= $datanotif->transaction_status ?></td>
+										<td><?php if ($datanotif->transaction_status == 'pending') {
+												echo "Belum Dibayar";
+											} elseif ($datanotif->transaction_status == 'settlement') {
+												echo "Suda Dibayar";
+											} else {
+												echo $datanotif->transaction_status;
+											} ?></td>
 									</tr>
 									<tr>
 										<td class="text-center" colspan="2">Informasi Selengkapnya Silahkan Cek Email Anda</td>
