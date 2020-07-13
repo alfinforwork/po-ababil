@@ -265,7 +265,7 @@
 										<td class="font-weight-bold">Waktu Mundur</td>
 										<td class="font-weight-bold" style="color: red"><span id="waktumundur"><?= $datanotif->transaction_time ?></span></td>
 									</tr> -->
-									<script>
+									<!-- <script>
 										var intervalnew = setInterval(function() {
 											var tanggal = new Date("<?= $datanotif->transaction_time  ?>");
 											var tgl_berangkat = tanggal.getTime();
@@ -298,7 +298,7 @@
 											// return Math.floor(hari) + ' Hari ' + Math.floor(jam) + ' Jam ' + Math.floor(menit) + ' Menit ' + Math.floor(detik) + ' Detik ';
 											return Math.floor(jam) + ' Jam ' + Math.floor(menit) + ' Menit ' + Math.floor(detik) + ' Detik ';
 										}
-									</script>
+									</script> -->
 									<tr>
 										<td class="font-weight-bold">Status Transaksi</td>
 										<td><?= $datanotif->transaction_status ?></td>
