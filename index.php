@@ -10,7 +10,7 @@
 					<div class="container">
 						<div class="banner-info_agile_w3ls">
 							<h3 class="text-da mb-4">PO Ababil</h3>
-							<p>Keselamatan dan kenyamanan Anda adalah prioritas kami.</p>
+							<p>Keselamatan dan kenyamanan Anda adalah prioritas kami PO ABABIL TRAVEL.</p>
 							<a href="buy-ticket.php" class="button-w3ls active mt-5">Order Now
 								<span class="fa fa-caret-right ml-1" aria-hidden="true"></span>
 							</a>
