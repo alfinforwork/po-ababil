@@ -47,7 +47,7 @@
 					$mail->SMTPDebug = 0;
 
 					//Set the hostname of the mail server
-					$mail->Host = 'smtp.gmail.com';
+					$mail->Host = 'mail.poababil.com';
 					// use
 					// $mail->Host = gethostbyname('smtp.gmail.com');
 					// if your network does not support SMTP over IPv6
@@ -62,13 +62,13 @@
 					$mail->SMTPAuth = true;
 
 					//Username to use for SMTP authentication - use full email address for gmail
-					$mail->Username = "ababil.transs@gmail.com";
+					$mail->Username = "cs@poababil.com";
 
 					//Password to use for SMTP authentication
-					$mail->Password = "ababiltrans2013";
+					$mail->Password = "poababil";
 
 					//Set who the message is to be sent from
-					$mail->setFrom('ababil.transs@gmail.com', 'PO Ababil Travel');
+					$mail->setFrom('cs@poababil.com', 'PO Ababil Travel');
 
 					//Set who the message is to be sent to
 					$mail->addAddress($email, 'Pelanggan');
