@@ -36,6 +36,11 @@
 			"email" => $query_user->email,
 			"phone" => $query_user->hp
 		],
+		"custom_expiry" => [
+			"order_time" => date('Y-m-d H:i:s'),
+			"expiry_duration" => 1,
+			"unit" => "day"
+		]
 	);
 	$midtransconfig = new \Midtrans\Config;
 	// $midtransconfig = new \Veritrans_Config;
@@ -212,13 +217,6 @@
 						<div class="col-md-2" style="display: flex;justify-content: center;padding-top: 5%">
 							<img src="images/rek.png" style="align-items: center;width: 94px;height:94px">
 						</div>
-						<?php
-
-						echo "<pre>";
-						print_r(@$datanotif);
-						echo "</pre>";
-
-						?>
 						<?php if (isset($datanotif)) { ?>
 							<div class="col-md-6">
 								<table class="table table-sm my-4 mx-auto col-md-5 bg-blue">
@@ -259,28 +257,27 @@
 										<td class="font-weight-bold">Biaya</td>
 										<td><?= $datanotif->gross_amount ?></td>
 									</tr>
-									<tr>
+									<!-- <tr>
 										<td class="font-weight-bold">Tenggang Waktu</td>
 										<td class="font-weight-bold"><span id="waktuawal"><?= $datanotif->transaction_time ?></span></td>
 									</tr>
 									<tr>
 										<td class="font-weight-bold">Waktu Mundur</td>
 										<td class="font-weight-bold" style="color: red"><span id="waktumundur"><?= $datanotif->transaction_time ?></span></td>
-									</tr>
+									</tr> -->
 									<script>
 										var intervalnew = setInterval(function() {
 											var tanggal = new Date("<?= $datanotif->transaction_time  ?>");
-											tanggal.setHours(tanggal.getHours() + 1)
 											var tgl_berangkat = tanggal.getTime();
 											var now = new Date().getTime();
 											var waktumundur = tgl_berangkat - now;
-											console.log('tgl berangkat ' + new Date("<?= $tgl_berangkat  ?>"));
+											console.log('tgl berangkat ' + new Date(tgl_berangkat));
 											if (waktumundur <= 0) {
 												console.log('expired');
 												document.getElementById('waktumundur').innerHTML = "EXPIRED " + konversi(waktumundur);
 												document.getElementById('transfer').style.display = "none";
-												alert("Waktu bayar telah EXPIRED");
-												clearInterval(intervalnew);
+												// alert("Waktu bayar telah EXPIRED");
+												// clearInterval(intervalnew);
 											} else {
 												console.log(waktumundur);
 												document.getElementById('waktumundur').innerHTML = konversi(waktumundur);
@@ -305,6 +302,9 @@
 									<tr>
 										<td class="font-weight-bold">Status Transaksi</td>
 										<td><?= $datanotif->transaction_status ?></td>
+									</tr>
+									<tr>
+										<td class="text-center" colspan="2">Informasi Selengkapnya Silahkan Cek Email Anda</td>
 									</tr>
 									<tr>
 										<td colspan="2" class="font-weight-bold text-center"><a href="<?= $query->url_panduan_pembayaran ?>">Panduan Pembayaran</a></td>
