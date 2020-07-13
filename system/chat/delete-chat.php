@@ -1,4 +1,6 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
 require_once('../../connect.php');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     @$id_chat_detail = @$_POST['id_chat_detail'];

@@ -1,6 +1,7 @@
 	<?php
 	session_start();
 	include_once('header.php');
+	require_once('./vendor/autoload.php');
 
 	function rupiah($angka)
 	{
@@ -8,6 +9,74 @@
 		$hasil_rupiah = "Rp " . number_format($angka, 2, ',', '.');
 		return $hasil_rupiah;
 	}
+
+
+
+
+
+
+
+	$kd_pembayaran = $_GET['id'];
+
+	$query = $con->query("SELECT * FROM pemesanan JOIN biaya ON pemesanan.id_biaya = biaya.id_biaya WHERE kd_pemesanan='$kd_pembayaran' ")->fetch_object();
+	$query_user = $con->query("SELECT * FROM pelanggan WHERE id_pelanggan = '$_SESSION[id]' ")->fetch_object();
+
+
+
+	$jumlah_biaya = $query->biaya * $query->jml_tiket;
+
+	$params = array(
+		'transaction_details' => array(
+			'order_id' => date("Ymd") . rand(),
+			'gross_amount' => $jumlah_biaya // no decimal allowed
+		),
+		"customer_details" => [
+			"first_name" => "",
+			"last_name" => $query_user->pelanggan,
+			"email" => $query_user->email,
+			"phone" => $query_user->hp
+		],
+	);
+	$midtransconfig = new \Midtrans\Config;
+	// $midtransconfig = new \Veritrans_Config;
+	$midtransSnap	= new \Midtrans\Snap;
+	// $midtransSnap	= new \Veritrans_Snap;
+
+	// Set your Merchant Server Key
+	$midtransconfig::$serverKey = 'SB-Mid-server-270TWDakPQ0jjPb9OKRI92WS';
+	// Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+	$midtransconfig::$isProduction = false;
+	// Set sanitization on (default)
+	$midtransconfig::$isSanitized = true;
+	// Set 3DS transaction for credit card to true
+	$midtransconfig::$is3ds = true;
+
+	$snapToken = $midtransSnap::getSnapToken($params);
+
+	if (empty($query->id_pembayaran)) {
+	} else {
+		$datanotif = \Midtrans\Transaction::status($query->id_pembayaran);
+		if ($datanotif->transaction_status == "settlement" && $query->status == 'belum dibayar') {
+			header("Location:upload-bukti-transfer-selesai.php?id=$kd_pembayaran");
+		}
+	}
+
+	if ($query->status = 'sudah bayar') {
+		header("Location:system/tiket.php");
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	// If the user is logged in redirect to the dashboard page...
 	if (!isset($_SESSION['loggedin'])) {
@@ -63,9 +132,9 @@
 					Silahkan isi form dibawah ini.
 				</p>
 			</div> -->
-			<div class="row contact-agileinfo pt-lg-4">
+			<div class="contact-agileinfo pt-lg-4">
 				<!-- contact form -->
-				<div class="col-lg-7 contact-right mt-lg-0 mt-5">
+				<div class="contact-right mt-lg-0 mt-5">
 					<?php
 					if (!empty($_SESSION['email'])) {
 						$stmt = $con->prepare('SELECT * FROM rekening LIMIT 1');
@@ -91,7 +160,7 @@
 					<h3 class="footer-title mb-4 pb-lg-2">Pesanan Anda berhasil dibuat</h3>
 
 					<!-- <p> Maksimal Transfer 1 jam, admin akan menghapusnya :</p> <div id='jam' ></div> -->
-					<div id='form'>
+					<!-- <div id='form'>
 						<h3> HASIL TIMER</h3>
 						<div style='background: #D20000;height: 100px;width: 100%; color: white;justify-content: center;display:flex;align-items: center'>
 							<div id="waktumundur" class="text-center"></div>
@@ -139,22 +208,115 @@
 								}
 							</script>
 						</div>
-					</div>
-					<p>Silahkan transfer uang ke :</p><br>
-					<form method="post" enctype="multipart/form-data">
-						<div class="row">
-							<div class="col-lg-4 form-group pr-lg-2">
-								<img src="images/rek.png" width="94">
+					</div> -->
+					<div class="row">
+						<div class="col-md-2" style="display: flex;justify-content: center;padding-top: 5%">
+							<img src="images/rek.png" style="align-items: center;width: 94px;height:94px">
+						</div>
+						<?php if (isset($datanotif)) { ?>
+							<div class="col-md-6">
+								<table class="table table-sm my-4 mx-auto col-md-5 bg-blue">
+									<?php if (isset($datanotif->store)) { ?>
+										<tr>
+											<td class="font-weight-bold">Tempat Pembayaran</td>
+											<td><?= $datanotif->store ?></td>
+										</tr>
+										<tr>
+											<td class="font-weight-bold">Kode Transaksi</td>
+											<td><?= $datanotif->payment_code ?></td>
+										</tr>
+									<?php } ?>
+									<?php if (isset($datanotif->payment_type)) { ?>
+										<tr>
+											<td class="font-weight-bold">Tempat Pembayaran</td>
+											<td><?= $datanotif->payment_type ?></td>
+										</tr>
+									<?php } ?>
+									<?php if (isset($datanotif->approval_code)) { ?>
+										<tr>
+											<td class="font-weight-bold">Approval Code</td>
+											<td><?= $datanotif->approval_code ?></td>
+										</tr>
+									<?php } ?>
+									<?php if (isset($datanotif->va_numbers)) { ?>
+										<tr>
+											<td class="font-weight-bold">Bank</td>
+											<td><?= $datanotif->va_numbers[0]->bank ?></td>
+										</tr>
+										<tr>
+											<td class="font-weight-bold">Va Number</td>
+											<td><?= $datanotif->va_numbers[0]->va_number ?></td>
+										</tr>
+
+									<?php } ?>
+									<tr>
+										<td class="font-weight-bold">Biaya</td>
+										<td><?= $datanotif->gross_amount ?></td>
+									</tr>
+									<tr>
+										<td class="font-weight-bold">Tenggang Waktu</td>
+										<td class="font-weight-bold"><span id="waktuawal"><?= $datanotif->transaction_time ?></span></td>
+									</tr>
+									<tr>
+										<td class="font-weight-bold">Waktu Mundur</td>
+										<td class="font-weight-bold" style="color: red"><span id="waktumundur"><?= $datanotif->transaction_time ?></span></td>
+									</tr>
+									<script>
+										var intervalnew = setInterval(function() {
+											var tanggal = new Date("<?= $datanotif->transaction_time  ?>");
+											tanggal.setHours(tanggal.getHours() + 1)
+											var tgl_berangkat = tanggal.getTime();
+											var now = new Date().getTime();
+											var waktumundur = tgl_berangkat - now;
+											console.log('tgl berangkat ' + new Date("<?= $tgl_berangkat  ?>"));
+											if (waktumundur <= 0) {
+												console.log('expired');
+												document.getElementById('waktumundur').innerHTML = "EXPIRED " + konversi(waktumundur);
+												document.getElementById('transfer').style.display = "none";
+												alert("Waktu bayar telah EXPIRED");
+												clearInterval(intervalnew);
+											} else {
+												console.log(waktumundur);
+												document.getElementById('waktumundur').innerHTML = konversi(waktumundur);
+												document.getElementById('transfer').style.display = "block";
+											}
+										}, 500);
+
+										function konversi(input) {
+
+											// Time calculations for days, hours, minutes and seconds
+											var hari = Math.floor(input / (1000 * 60 * 60 * 24));
+											var jam = Math.floor((input % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+											var menit = Math.floor((input % (1000 * 60 * 60)) / (1000 * 60));
+											var detik = Math.floor((input % (1000 * 60)) / 1000);
+
+											// Output the result in an element with id="demo"
+
+											// return Math.floor(hari) + ' Hari ' + Math.floor(jam) + ' Jam ' + Math.floor(menit) + ' Menit ' + Math.floor(detik) + ' Detik ';
+											return Math.floor(jam) + ' Jam ' + Math.floor(menit) + ' Menit ' + Math.floor(detik) + ' Detik ';
+										}
+									</script>
+									<tr>
+										<td class="font-weight-bold">Status Transaksi</td>
+										<td><?= $datanotif->transaction_status ?></td>
+									</tr>
+									<tr>
+										<td colspan="2" class="font-weight-bold text-center"><a href="<?= $query->url_panduan_pembayaran ?>">Panduan Pembayaran</a></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+									</tr>
+								</table>
 							</div>
-							<div class="col-lg-3 form-group pl-lg-2">
-								<p>Bank </p>
+						<?php } else { ?>
+							<div class="col-md-2">
 								<p>Nama </p>
 								<p>No Rekening </p>
 								<p>Biaya </p>
 
 							</div>
-							<div class="col-lg-5 form-group pl-lg-2">
-								<p>: <?= $bank ?></p>
+							<div class="col-md-4">
 								<p>: <?= $nama ?></p>
 								<p>: <?= $norek ?></p>
 
@@ -162,30 +324,63 @@
 								//$jml = $jml_tiket * 150000;
 								echo '<p>: ' . rupiah($biaya) . '</p>';
 								?>
+							</div>
+						<?php } ?>
 
+
+
+					</div>
+					<br>
+					<div id="transfer">
+						<div class="row">
+							<div class="col-lg-4 form-group pr-lg-2">
+
+							</div>
+							<div class="col-lg-8 form-group pl-lg-2">
+								<script src="system/js/axios.min.js" type="text/javascript"></script>
+								<script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-KOObE-Oc9gK-mPxI"></script>
+
+								<?php if (!isset($datanotif) || $datanotif->transaction_status == 'expired' || $datanotif->transaction_status == 'cancel') { ?>
+									<button id="pay-button" type="button" class="btn btn-sm btn-primary">Pilih Metode Pembayaran</button>
+								<?php } ?>
+								<script type="text/javascript">
+									var payButton = document.getElementById('pay-button');
+									payButton.addEventListener('click', function() {
+										// snap.pay('<SNAP_TOKEN>');
+										snap.show();
+										snap.pay('<?= $snapToken ?>', {
+											onSuccess: function(result) {
+												console.log('success');
+												console.log(result);
+												axios.post('<?= $root . "system/api_pembayaran.php?id=$kd_pembayaran" ?>', result).then(response => {
+													console.log(response);
+													alert('Success');
+													window.location.href = "<?= $root . "upload-bukti-transfer.php?id=$kd_pembayaran" ?>"
+												});
+											},
+											onPending: function(result) {
+												console.log('pending');
+												axios.post('<?= $root . "system/api_pembayaran.php?id=$kd_pembayaran" ?>', result).then(response => {
+													alert('Pending');
+													window.location.href = "<?= $root . "upload-bukti-transfer.php?id=$kd_pembayaran" ?>"
+												});
+												console.log(result);
+											},
+											onError: function(result) {
+												console.log('error');
+												console.log(result);
+												alert('Error');
+											},
+											onClose: function() {
+												console.log('customer closed the popup without finishing the payment');
+											}
+										});
+									});
+								</script>
 							</div>
 						</div>
-						<br>
-						<div id="transfer">
-							<div class="row">
-								<div class="col-lg-4 form-group pr-lg-2">
-									<p>Upload bukti transfer</p>
-								</div>
-								<div class="col-lg-3 form-group pl-lg-2">
-									<input type="file" name="upload" accept="image/png, image/jpeg">
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-lg-4 form-group pr-lg-2">
+					</div>
 
-								</div>
-								<div class="col-lg-8 form-group pl-lg-2">
-									<button type="submit" name="upload" class="btn submit-contact-main">Upload</button>
-								</div>
-							</div>
-						</div>
-
-					</form>
 				</div>
 				<!-- contact form -->
 			</div>

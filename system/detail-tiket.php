@@ -200,106 +200,110 @@ $stmt->fetch();
 																	if ($waktu == 'sore') {
 																		echo 'selected';
 																	}
-																	echo '>Sore</option>';
-																	?> </select> </div> </div> <div class="line">
+																	echo '';
+																	?>>Sore</option>
+										</select>
 									</div>
+								</div>
+								<div class="line">
+								</div>
 
-									<div class="form-group row">
-										<label class="col-md-3 form-control-label">Tempat Penjemputan</label>
-										<div class="col-md-8">
-											<input type="text" max="8" name="tmp_jemput" class="form-control" value="<?= $tmp_jemput; ?>" readonly required>
-										</div>
+								<div class="form-group row">
+									<label class="col-md-3 form-control-label">Tempat Penjemputan</label>
+									<div class="col-md-8">
+										<input type="text" max="8" name="tmp_jemput" class="form-control" value="<?= $tmp_jemput; ?>" readonly required>
 									</div>
-									<div class="line"></div>
-									<div class="form-group row">
-										<label class="col-md-3 form-control-label">Alamat Spesifik Penjemputan</label>
-										<div class="col-md-8">
-											<input type="text" max="8" name="alamatpenjemputan" class="form-control" value="<?= $alamat_spesifik_dari ?>" readonly required>
-										</div>
+								</div>
+								<div class="line"></div>
+								<div class="form-group row">
+									<label class="col-md-3 form-control-label">Alamat Spesifik Penjemputan</label>
+									<div class="col-md-8">
+										<input type="text" max="8" name="alamatpenjemputan" class="form-control" value="<?= $alamat_spesifik_dari ?>" readonly required>
 									</div>
-									<div class="line"></div>
-									<div class="form-group row">
-										<label class="col-md-3 form-control-label">Tujuan</label>
-										<div class="col-md-8">
-											<input type="text" max="8" name="tmp_tujuan" class="form-control" value="<?= $tmp_tujuan; ?>" readonly required>
-										</div>
+								</div>
+								<div class="line"></div>
+								<div class="form-group row">
+									<label class="col-md-3 form-control-label">Tujuan</label>
+									<div class="col-md-8">
+										<input type="text" max="8" name="tmp_tujuan" class="form-control" value="<?= $tmp_tujuan; ?>" readonly required>
 									</div>
-									<div class="line"></div>
-									<div class="form-group row">
-										<label class="col-md-3 form-control-label">Alamat Spesifik Tujuan</label>
-										<div class="col-md-8">
-											<input type="text" max="8" name="alamattujuan" class="form-control" value="<?= $alamat_spesifik_ke ?>" readonly required>
-										</div>
+								</div>
+								<div class="line"></div>
+								<div class="form-group row">
+									<label class="col-md-3 form-control-label">Alamat Spesifik Tujuan</label>
+									<div class="col-md-8">
+										<input type="text" max="8" name="alamattujuan" class="form-control" value="<?= $alamat_spesifik_ke ?>" readonly required>
 									</div>
+								</div>
 
-									<div class="line"></div>
-									<div class="form-group row">
-										<label class="col-md-3 form-control-label">Biaya</label>
-										<div class="col-md-8">
-											<input type="text" max="8" name="biaya" class="form-control" value="<?= $biaya ?>" readonly required>
-										</div>
+								<div class="line"></div>
+								<div class="form-group row">
+									<label class="col-md-3 form-control-label">Biaya</label>
+									<div class="col-md-8">
+										<input type="text" max="8" name="biaya" class="form-control" value="<?= $biaya ?>" readonly required>
 									</div>
-									<div class="line"></div>
-									<?php
-									if ($_SESSION['level'] == 'admin') {
-										echo '<div class="form-group row">
+								</div>
+								<div class="line"></div>
+								<?php
+								if ($_SESSION['level'] == 'admin') {
+									echo '<div class="form-group row">
 											<label class="col-md-3 form-control-label">Status</label>
 											<div class="col-md-8">
 											<select name="status" class="form-control">
 												<option value="belum dibayar"';
-										if ($status == 'belum dibayar') {
-											echo 'selected';
-										}
-										echo '>Belum dibayar</option>
+									if ($status == 'belum dibayar') {
+										echo 'selected';
+									}
+									echo '>Belum dibayar</option>
 													<option value="sudah dibayar"';
-										if ($status == 'sudah dibayar') {
-											echo 'selected';
-										}
-										echo '>Sudah dibayar</option>
+									if ($status == 'sudah dibayar') {
+										echo 'selected';
+									}
+									echo '>Sudah dibayar</option>
 													<option value="selesai"';
-										if ($status == 'selesai') {
-											echo 'selected';
-										}
-										echo '>Selesai</option>
+									if ($status == 'selesai') {
+										echo 'selected';
+									}
+									echo '>Selesai</option>
 												</select>
 											</div>
 										</div>
 										<div class="line"></div>';
-									}
-									?>
-									<div class="form-group row">
-										<div class="col-md-9 ml-auto">
-											<?php
+								}
+								?>
+								<div class="form-group row">
+									<div class="col-md-9 ml-auto">
+										<?php
 
-											if ($_SESSION['level'] == 'pelanggan') {
-												if ($status == 'belum dibayar') {
-													echo '
+										if ($_SESSION['level'] == 'pelanggan') {
+											if ($status == 'belum dibayar') {
+												echo '
 													<!--<button type="submit" name="editTiket" class="btn btn-primary">Save</button>-->
 												<a href="tiket.php" class="btn btn-secondary">Back</a>
-												<a href="../upload-bukti-transfer.php?id=' . $id . '" class="btn btn-success">Upload bukti transfer</a>';
-												} else {
-													echo '<a href="tiket.php" class="btn btn-secondary">Back</a>';
-												}
-											}
-											if ($_SESSION['level'] == 'sopir') {
+												<a href="../upload-bukti-transfer.php?id=' . $id . '" class="btn btn-success">Bayar</a>';
+											} else {
 												echo '<a href="tiket.php" class="btn btn-secondary">Back</a>';
 											}
-											if ($_SESSION['level'] == 'admin') {
-												echo '
+										}
+										if ($_SESSION['level'] == 'sopir') {
+											echo '<a href="tiket.php" class="btn btn-secondary">Back</a>';
+										}
+										if ($_SESSION['level'] == 'admin') {
+											echo '
 											<button type="submit" name="editTiket" class="btn btn-primary">Save</button>
 											<a href="tiket.php" class="btn btn-secondary">Back</a>';
-												if (empty($bukti_transfer)) {
-													echo " Belum upload bukti transfer";
-												} else {
-													echo '
+											if (empty($bukti_transfer)) {
+												echo " Belum upload bukti transfer";
+											} else {
+												echo '
 												<a href="../' . $bukti_transfer . '" target="_blank" class="btn btn-danger">Cek bukti transfer</a>';
-												}
 											}
-											//<a href="../upload-bukti-transfer.php?id='.$id.'" class="btn btn-success">Upload bukti transfer</a>
-											?>
+										}
+										//<a href="../upload-bukti-transfer.php?id='.$id.'" class="btn btn-success">Upload bukti transfer</a>
+										?>
 
-										</div>
 									</div>
+								</div>
 
 							</form>
 						</div>

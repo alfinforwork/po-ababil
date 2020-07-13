@@ -300,7 +300,7 @@ if (!isset($_SESSION['loggedin'])) {
 								$('#show-chat').html(html);
 							}
 						});
-					}, 500);
+					}, 2000);
 
 					// Send Chat
 					$('#chat-form').on('submit', function(e) {
