@@ -68,7 +68,7 @@
 					$mail->Password = "poababil";
 
 					//Set who the message is to be sent from
-					$mail->setFrom('cs@poababil.com', 'PO Ababil Travel');
+					$mail->setFrom('cs@poababil.com', 'Admin PO Ababil Travel');
 
 					//Set who the message is to be sent to
 					$mail->addAddress($email, 'Pelanggan');

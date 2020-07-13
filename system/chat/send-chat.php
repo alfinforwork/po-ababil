@@ -59,7 +59,7 @@ $mail->Username = "cs@poababil.com";
 $mail->Password = "poababil";
 
 //Set who the message is to be sent from
-$mail->setFrom('cs@poababil.com', 'Admin');
+$mail->setFrom('cs@poababil.com', 'Admin PO Ababil Travel');
 
 //Set an alternative reply-to address
 // $mail->addReplyTo('mzq100m@gmail.com', 'First Last');

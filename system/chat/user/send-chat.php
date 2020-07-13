@@ -77,7 +77,7 @@ $mail->setFrom($email, $data['pelanggan']);
 // $mail->addReplyTo('mzq100m@gmail.com', 'First Last');
 
 //Set who the message is to be sent to
-$mail->addAddress('ababil.transs@gmail.com', 'Admin');
+$mail->addAddress('ababil.transs@gmail.com', 'Admin PO Ababil Travel');
 
 //Set the subject line
 $mail->Subject = 'Chat';
