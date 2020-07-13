@@ -11,11 +11,12 @@ $query->execute();
 
 
 
+// require '../../vendor/autoload.php';
+require '../../vendor/autoload.php';
+
 //Import PHPMailer classes into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
 
-// require 'phpmailer/vendor/autoload.php';
-require '../../phpmailer/vendor/autoload.php';
 
 //Create a new PHPMailer instance
 $mail = new PHPMailer;

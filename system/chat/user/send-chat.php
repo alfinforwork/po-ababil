@@ -24,7 +24,7 @@ $query->execute();
 use PHPMailer\PHPMailer\PHPMailer;
 
 // require 'phpmailer/vendor/autoload.php';
-require '../../../phpmailer/vendor/autoload.php';
+require '../../../vendor/autoload.php';
 
 
 //Create a new PHPMailer instance
