@@ -61,7 +61,7 @@
 		}
 	}
 
-	if ($query->status = 'sudah bayar') {
+	if ($datanotif->transaction_status == "settlement" && $query->status == 'sudah bayar') {
 		header("Location:system/tiket.php");
 	}
 
