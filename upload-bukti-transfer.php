@@ -164,7 +164,7 @@
 						<h3> HASIL TIMER</h3>
 						<div style='background: #D20000;height: 100px;width: 100%; color: white;justify-content: center;display:flex;align-items: center'>
 							<div id="waktumundur" class="text-center"></div>
-							<?php $root  = "http://" . $_SERVER['HTTP_HOST'];
+							<?php $root  = "https://" . $_SERVER['HTTP_HOST'];
 							$root .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']); ?>
 
 							<script>
