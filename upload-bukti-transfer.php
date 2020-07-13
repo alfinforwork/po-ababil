@@ -306,7 +306,7 @@
 										<td><?php if ($datanotif->transaction_status == 'pending') {
 												echo "Belum Dibayar";
 											} elseif ($datanotif->transaction_status == 'settlement') {
-												echo "Suda Dibayar";
+												echo "Sudah Dibayar";
 											} else {
 												echo $datanotif->transaction_status;
 											} ?></td>
