@@ -50,7 +50,7 @@
 	// Set your Merchant Server Key
 	$midtransconfig::$serverKey = 'SB-Mid-server-270TWDakPQ0jjPb9OKRI92WS';
 	// Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-	$midtransconfig::$isProduction = false;
+	$midtransconfig::$isProduction = true;
 	// Set sanitization on (default)
 	$midtransconfig::$isSanitized = true;
 	// Set 3DS transaction for credit card to true
