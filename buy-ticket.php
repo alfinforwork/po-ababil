@@ -225,7 +225,7 @@ if (isset($_POST['beli'])) {
 
 							<script src="system/js/axios.min.js"></script>
 							<?php
-							$root  = "http://" . $_SERVER['HTTP_HOST'];
+							$root  = "https://" . $_SERVER['HTTP_HOST'];
 							$root .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
 							?>
 
