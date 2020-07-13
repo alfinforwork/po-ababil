@@ -51,7 +51,7 @@ include_once('./header.php');
     <?php
     include_once('./footer.php');
 
-    $root  = "http://" . $_SERVER['HTTP_HOST'];
+    $root  = "https://" . $_SERVER['HTTP_HOST'];
     if ($_SESSION['level'] <> 'admin') {
         echo "<script>window.location.replace('" . $root . str_replace('system/' . basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']) . 'logout.php' . "');</script>";
     }
