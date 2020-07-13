@@ -49,8 +49,10 @@
 
 	// Set your Merchant Server Key
 	$midtransconfig::$serverKey = 'SB-Mid-server-270TWDakPQ0jjPb9OKRI92WS';
+	// $midtransconfig::$serverKey = 'Mid-server-gpPmFzoqdJ5sqzRJ_Z8j_r_t';
 	// Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-	$midtransconfig::$isProduction = true;
+	$midtransconfig::$isProduction = false;
+	// $midtransconfig::$isProduction = true;
 	// Set sanitization on (default)
 	$midtransconfig::$isSanitized = true;
 	// Set 3DS transaction for credit card to true
@@ -345,6 +347,7 @@
 							<div class="col-lg-8 form-group pl-lg-2">
 								<script src="system/js/axios.min.js" type="text/javascript"></script>
 								<script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-KOObE-Oc9gK-mPxI"></script>
+								<!-- <script type="text/javascript" src="https://app.midtrans.com/snap/snap.js" data-client-key="Mid-client-ZwoGu0HMrx5kKXCB"></script> -->
 
 								<?php if (!isset($datanotif) || $datanotif->transaction_status == 'expired' || $datanotif->transaction_status == 'cancel') { ?>
 									<button id="pay-button" type="button" class="btn btn-sm btn-primary">Pilih Metode Pembayaran</button>
