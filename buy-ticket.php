@@ -255,6 +255,12 @@ if (isset($_POST['beli'])) {
 									});
 
 								})
+								$('#tmp_tujuan').change(function() {
+									var waktu = $(this).val();
+									var tanggal = $('#tgl_berangkat').val();
+									ajax(tanggal, waktu);
+									console.log("waktu = " + $(this).val());
+								})
 
 								function ajax(tanggal, waktu) {
 									$.get("<?= $root ?>buy-ticket-show-kursi.php/?tanggal=" + tanggal + "&waktu=" + waktu, function(res) {
