@@ -113,7 +113,7 @@
 		<div class="container py-xl-5 py-3">
 			<div class="login-body">
 				<div class="login p-4 mx-auto">
-					<h5 class="text-center mb-4">Register Now</h5>
+					<h5 class="text-center mb-4">Register Admin</h5>
 					<form method="POST">
 						<div class="form-group">
 							<label>Email</label>
