@@ -149,56 +149,6 @@
 	</section>
 	<!-- //GALERI -->
 
-	<!-- TESTIMONI -->
-	<section class="blog_w3ls py-5" id="testimoni">
-		<div class="container py-xl-5 py-lg-3">
-			<div class="title-section text-center mb-md-5 mb-4">
-				<h3 class="w3ls-title mb-3">Testimoni <span>Pelanggan</span></h3>				
-			</div>
-			<div class="row">
-				<!-- blog grid -->
-				<div class="col-lg-4 col-md-6">
-					<div class="card border-0">
-						<div class="card-body text-center pt-5 mt-2">
-							<img src="images/usertesti.png" width="98" class="img-blog rounded-circle img-fluid">
-							<h5 class="blog-title card-title mb-2">
-								<a href="login.php">Angga</a>
-							</h5>
-							<p>semoga kedepannya tetap masih seperti ini.</p>							
-						</div>
-					</div>
-				</div>
-				<!-- //blog grid -->
-				<!-- blog grid -->
-				<div class="col-lg-4 col-md-6">
-					<div class="card border-0">
-						<div class="card-body text-center pt-5 mt-2">
-							<img src="images/usertesti.png" width="98" class="img-blog rounded-circle img-fluid">
-							<h5 class="blog-title card-title mb-2">
-								<a href="login.php">Rio</a>
-							</h5>
-							<p>sistem ini menurut saya sangat mempermudah dalam pemesanan travel.</p>							
-						</div>
-					</div>
-				</div>
-				<!-- //blog grid -->
-				<!-- blog grid -->
-				<div class="col-lg-4 col-md-6">
-					<div class="card border-0">
-						<div class="card-body text-center pt-5 mt-2">
-							<img src="images/usertesti.png" width="98" class="img-blog rounded-circle img-fluid">
-							<h5 class="blog-title card-title mb-2">
-								<a href="login.php">Agus</a>
-							</h5>
-							<p>sistem po ababil ini bisa mengetahui posisi lokasi kendaraan tanpa bertannya petugas dikantornya.</p>							
-						</div>
-					</div>
-				</div>
-				<!-- //blog grid -->
-			</div>
-		</div>
-	</section>
-	<!-- //TESTIMONI -->
 
 	<!-- JADWAL -->
 	<section class="blog_w3ls py-5" id="jadwal">
