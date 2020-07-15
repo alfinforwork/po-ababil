@@ -158,24 +158,15 @@ if (!isset($_SESSION['loggedin'])) {
 						<i class="fas fa-receipt mr-3 text-gray icon"></i><span>Tiket</span>
 					</a>
 				</li>
-
 				<?php
-				if (($_SESSION['level'] == 'admin') | ($_SESSION['level'] == 'sopir')) {
-					echo '
+				if ($_SESSION['level'] == 'sopir') { ?>
 					<li class="sidebar-list-item">
-						<a href="pelanggan.php" class="sidebar-link text-muted';
-					if (strpos($uri, "pelanggan") == true) {
-						echo 'active';
-					}
-					echo '">
-							<i class="fas fa-street-view mr-3 text-gray icon"></i><span>pelanggan</span>
+						<a href="pelanggan.php" class="sidebar-link text-muted 
+								<?php if (strpos($uri, "pelanggan") == true) echo "active" ?>">
+							<i class=" fas fa-users mr-3 text-gray icon"></i><span>Pelanggan</span>
 						</a>
-					</li>';
-				}
-				?>
+					</li>
 
-				<?php
-				if ($_SESSION['level'] == 'admin') { ?>
 					<li class="sidebar-list-item">
 						<a href="biayaalamat.php" class="sidebar-link text-muted 
 						<?php if (strpos($uri, "biayaalamat") == true or strpos($uri, "alamat") == true) echo "active"; ?>">
