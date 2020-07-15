@@ -59,7 +59,7 @@ if (isset($_GET['hapus'])) {
 						<div class="card-body">
 							<?php
 							if ($_SESSION['level'] == 'admin') {
-								echo '<a href="tambah-pelanggan.php" class="btn bg-primary">Tambah/a> <hr>';
+								echo '<a href="tambah-pelanggan.php" class="btn bg-primary">Tambah </a>';
 							}
 							?>
 							<div class="table-responsive">
@@ -90,8 +90,8 @@ if (isset($_GET['hapus'])) {
 														<td>' . $pelanggan . '</td>
 														<td>' . $hp . '</td>
 														<td>' . $email . '</td>
-														<td>
-														</a>';
+														<td> </td>';
+
 												if (($_SESSION['level'] == 'admin') | ($_SESSION['level'] == 'pelanggan')) {
 													echo ' <a href="detail-pelanggan.php?id=' . $id . '">Detail</a>';
 												}
@@ -101,7 +101,7 @@ if (isset($_GET['hapus'])) {
 												}
 												echo '			
 																
-														</td>
+														
 													</tr>';
 											}
 										} else {
