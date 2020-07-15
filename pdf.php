@@ -32,7 +32,7 @@
 		</tr>
 		<?php
 		$no = 1;
-		$sql = $con->query('SELECT `kd_pemesanan`,`tgl_berangkat`, `jml_tiket`,`alamat_lengkap_dari`,`no_kursi`, `pelanggan`.`pelanggan`, `alamat_lengkap_ke`, `tarif`, `status` FROM pemesanan INNER JOIN pelanggan ON pemesanan.id_pelanggan = pelanggan.id_pelanggan');
+		$sql = $con->query('SELECT `kd_pemesanan`,`tgl_berangkat`, `jml_tiket`, `id_biaya`, `alamat_lengkap_dari`,`no_kursi`, `pelanggan`.`pelanggan`, `alamat_lengkap_ke`, `status` FROM pemesanan INNER JOIN pelanggan ON pemesanan.id_pelanggan = pelanggan.id_pelanggan');
 		while ($data = mysqli_fetch_array($sql)) {
 		?>
 			<tr>
@@ -44,7 +44,7 @@
 				<th><?php echo $data['alamat_lengkap_dari']; ?></th>
 				<th><?php echo $data['alamat_lengkap_ke']; ?></th>
 				<th><?php echo $data['status']; ?></th>
-				<th><?php echo $data['tarif']; ?></th>
+				<th><?php echo $data['id_biaya']; ?></th>
 			</tr>
 		<?php
 		}
