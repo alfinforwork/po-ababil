@@ -2,7 +2,7 @@
 require_once('header.php');
 // require_once('../connect.php');
 
-if ($_SESSION['level'] != 'admin') {
+if (($_SESSION['level'] != 'admin') | ($_SESSION['level'] != 'sopir')) {
 	echo '<script>			
 			window.location.href = "index.php";
 		</script>';
