@@ -159,7 +159,7 @@ if (!isset($_SESSION['loggedin'])) {
 					</a>
 				</li>
 				<?php
-				if ($_SESSION['level'] == 'sopir') { ?>
+				if ($_SESSION['level'] == 'admin') { ?>
 					<li class="sidebar-list-item">
 						<a href="pelanggan.php" class="sidebar-link text-muted 
 								<?php if (strpos($uri, "pelanggan") == true) echo "active" ?>">
