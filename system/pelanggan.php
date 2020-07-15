@@ -2,11 +2,11 @@
 require_once('header.php');
 // require_once('../connect.php');
 
-if (($_SESSION['level'] != 'admin') | ($_SESSION['level'] != 'sopir')) {
-	echo '<script>			
-			window.location.href = "index.php";
-		</script>';
-}
+// if (($_SESSION['level'] != 'admin') | ($_SESSION['level'] != 'sopir')) {
+// 	echo '<script>			
+// 			window.location.href = "index.php";
+// 		</script>';
+// }
 
 // Hapus data pelanggan
 if (isset($_GET['hapus'])) {
