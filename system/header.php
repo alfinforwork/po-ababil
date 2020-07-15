@@ -161,7 +161,7 @@ if (!isset($_SESSION['loggedin'])) {
 				<?php
 				if (($_SESSION['level'] == 'admin') | ($_SESSION['level'] == 'sopir')) { ?>
 					<li class="sidebar-list-item">
-						<a href="../system/pelanggan.php" class="sidebar-link text-muted 
+						<a href="pelanggan.php" class="sidebar-link text-muted 
 								<?php if (strpos($uri, "pelanggan") == true) echo "active" ?>">
 							<i class=" fas fa-users mr-3 text-gray icon"></i><span>Pelanggan</span>
 						</a>

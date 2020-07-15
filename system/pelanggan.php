@@ -57,8 +57,11 @@ if (isset($_GET['hapus'])) {
 							<h6 class="text-uppercase mb-0">Pelanggan</h6>
 						</div>
 						<div class="card-body">
-							<a href="tambah-pelanggan.php" class="btn bg-primary">Tambah</a>
-							<hr>
+							<?php
+							if ($_SESSION['level'] == 'admin') {
+								echo '<a href="tambah-pelanggan.php" class="btn bg-primary">Tambah/a> <hr>';
+							}
+							?>
 							<div class="table-responsive">
 								<table id="example" class="table table-striped table-bordered">
 									<thead>
@@ -87,7 +90,8 @@ if (isset($_GET['hapus'])) {
 														<td>' . $pelanggan . '</td>
 														<td>' . $hp . '</td>
 														<td>' . $email . '</td>
-														<td><a href="detail-pelanggan.php?id=' . $id . '">Detail</a>';
+														<td>
+														<a href="detail-pelanggan.php?id=' . $id . '">Detail</a>';
 												if ($_SESSION['level'] == 'admin') {
 													echo ' | <a href="pelanggan.php?hapus=' . $id . '">Hapus</a>';
 												}
