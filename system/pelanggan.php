@@ -92,7 +92,7 @@ if (isset($_GET['hapus'])) {
 														<td>' . $email . '</td>
 														<td>
 														 <a</a>';
-												if (($_SESSION['level'] == 'admin') |  ($_SESSION['level'] == 'pelanggan')) {
+												if ($_SESSION['level'] == 'admin') {
 													echo '  <a href="detail-pelanggan.php?id' . $id . '">detail</a>';
 												}
 												if ($_SESSION['level'] == 'admin') {
