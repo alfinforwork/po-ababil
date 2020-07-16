@@ -173,7 +173,11 @@ $stmt->fetch();
 								<div class="form-group row">
 									<div class="col-md-9 ml-auto">
 										<button type="submit" class="btn btn-primary" name="updatePelanggan">Edit</button>
-										<a href="pelanggan.php" class="btn btn-secondary">Back</a>
+										<?php
+										if ($_SESSION['level'] == 'admin') {
+											echo '<a href="pelanggan.php" class="btn btn-secondary">Back</a>';
+										}
+										?>
 									</div>
 								</div>
 							</form>
