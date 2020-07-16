@@ -4,7 +4,7 @@ require_once('header.php');
 
 $id = $_GET['id'];
 $sid = $_SESSION['id'];
-if (($_SESSION['level'] == 'pelanggan') | ($_SESSION['level'] == 'admin')) {
+if ($_SESSION['level'] == 'pelanggan') {
 	if ($id != $sid) {
 		echo '<script>			
 			window.location.href = "detail-pelanggan.php?id=' . $sid . '";

@@ -91,18 +91,18 @@ if (isset($_GET['hapus'])) {
 														<td>' . $hp . '</td>
 														<td>' . $email . '</td>
 														<td>
-														 <a</a>';
+														<a</a>';
 												if ($_SESSION['level'] == 'admin') {
-													echo '  <a href="detail-pelanggan.php?id' . $id . '">detail</a>';
-
-
+													echo ' <a href="detail-pelanggan.php?id=' . $id . '">Detail</a>';
+												} {
 													echo ' | <a href="pelanggan.php?hapus=' . $id . '">Hapus</a>';
 												}
-												echo '							
+												echo '												
 														</td>
 													</tr>';
 											}
 										} else {
+
 											echo '<tr>
 														<td scope="row"></td>
 														<td></td>
