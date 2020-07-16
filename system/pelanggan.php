@@ -70,7 +70,13 @@ if (isset($_GET['hapus'])) {
 											<th>Nama</th>
 											<th>No HP</th>
 											<th>Email</th>
-											<th>Action</th>
+											<th><?php 
+											if ($_SESSION['level'] == 'admin') {
+											echo '<p>Action</p>	
+											
+											 '?>
+											</th>
+											
 										</tr>
 									</thead>
 									<tbody>
