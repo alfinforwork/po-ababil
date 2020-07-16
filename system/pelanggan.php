@@ -94,8 +94,8 @@ if (isset($_GET['hapus'])) {
 														 <a</a>';
 												if ($_SESSION['level'] == 'admin') {
 													echo '  <a href="detail-pelanggan.php?id' . $id . '">detail</a>';
-												}
-												if ($_SESSION['level'] == 'admin') {
+
+
 													echo ' | <a href="pelanggan.php?hapus=' . $id . '">Hapus</a>';
 												}
 												echo '							
