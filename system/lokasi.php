@@ -14,7 +14,7 @@ if ($stmt->num_rows > 0) {
    $stmt = $con->prepare('UPDATE lokasi SET latitude=?, longitude=? WHERE id_sopir=?');
    $stmt->bind_param('ssi', $latitude, $longitude, $id);
    $stmt->execute();
-   echo json_encode(['success' => true]);
+   echo json_encode($_POST);
 } else {
    $stmt = $con->prepare('INSERT INTO lokasi (id_sopir, latitude, longitude) VALUES (?, ?, ?)');
    $stmt->bind_param('iss', $id, $latitude, $longitude);
