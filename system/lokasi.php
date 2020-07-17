@@ -19,7 +19,7 @@ if ($stmt->num_rows > 0) {
    $stmt = $con->prepare('INSERT INTO lokasi (id_sopir, latitude, longitude) VALUES (?, ?, ?)');
    $stmt->bind_param('iss', $id, $latitude, $longitude);
    $stmt->execute();
-   echo json_encode(['success' => true]);
+   echo json_encode($_POST);
 }
 
 ?>
