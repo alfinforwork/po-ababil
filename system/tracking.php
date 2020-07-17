@@ -54,7 +54,7 @@ if (isset($_POST['simpan'])) {
 ?>
 
 <?php
-$root  = "http://" . $_SERVER['HTTP_HOST'];
+$root  = "https://" . $_SERVER['HTTP_HOST'];
 $root .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
 ?>
 
@@ -87,7 +87,7 @@ $root .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAM
 		setInterval(() => {
 			console.log('update');
 			navigator.geolocation.getCurrentPosition(simpanPosisi);
-		}, 500);
+		}, 2000);
 	});
 </script>
 
