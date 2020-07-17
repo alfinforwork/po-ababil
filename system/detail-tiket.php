@@ -1,10 +1,45 @@
 <?php
 
 require_once('header.php');
+require_once('./../vendor/autoload.php');
 // require_once('../connect.php');
 
 $id = $_GET['id'];
+$midtransconfig = new \Midtrans\Config;
+// $midtransconfig = new \Veritrans_Config;
 
+// Set your Merchant Server Key
+$midtransconfig::$serverKey = 'SB-Mid-server-270TWDakPQ0jjPb9OKRI92WS';
+// $midtransconfig::$serverKey = 'Mid-server-gpPmFzoqdJ5sqzRJ_Z8j_r_t';
+// Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+$midtransconfig::$isProduction = false;
+// $midtransconfig::$isProduction = true;
+// Set sanitization on (default)
+$midtransconfig::$isSanitized = true;
+// Set 3DS transaction for credit card to true
+$midtransconfig::$is3ds = true;
+
+
+$query = $con->query("SELECT * FROM pemesanan JOIN biaya ON pemesanan.id_biaya = biaya.id_biaya WHERE kd_pemesanan='$id' ")->fetch_object();
+
+if (empty($query->id_pembayaran)) {
+} else {
+	$datanotif = \Midtrans\Transaction::status($query->id_pembayaran);
+	if ($datanotif->transaction_status == "expire" || $datanotif->transaction_status == "deny" || $datanotif->transaction_status == "cancel" || $datanotif->transaction_status == "refund" || $datanotif->transaction_status == "chargeback" || $datanotif->transaction_status == "failure") {
+		$con->query("DELETE from pemesanan where kd_pemesanan='$kd_pembayaran' ");
+		echo '<script type="text/javascript">							
+									Swal.fire({
+										title: "Gagal!",
+										text: "' . $datanotif->transaction_status . '",
+										type: "error",
+										timer: 2000,
+										showConfirmButton: false
+									}).then(function(result) { 
+										window.location.href = "system/tiket.php";
+									});
+								</script>';
+	}
+}
 if (isset($_POST['editTiket'])) {
 	$status		= $_POST['status'];
 	$stmt = $con->prepare('UPDATE pemesanan SET status=? WHERE kd_pemesanan=?');
@@ -301,11 +336,71 @@ $stmt->fetch();
 										}
 										//<a href="../upload-bukti-transfer.php?id='.$id.'" class="btn btn-success">Upload bukti transfer</a>
 										?>
-
 									</div>
 								</div>
 
 							</form>
+
+
+							<table class="table table-sm my-4 mx-auto col-md-8">
+								<?php if (isset($datanotif->store)) { ?>
+									<tr>
+										<td class="font-weight-bold">Tempat Pembayaran</td>
+										<td><?= $datanotif->store ?></td>
+									</tr>
+									<tr>
+										<td class="font-weight-bold">Kode Transaksi</td>
+										<td><?= $datanotif->payment_code ?></td>
+									</tr>
+								<?php } ?>
+								<?php if (isset($datanotif->payment_type)) { ?>
+									<tr>
+										<td class="font-weight-bold">Tempat Pembayaran</td>
+										<td><?= $datanotif->payment_type ?></td>
+									</tr>
+								<?php } ?>
+								<?php if (isset($datanotif->approval_code)) { ?>
+									<tr>
+										<td class="font-weight-bold">Approval Code</td>
+										<td><?= $datanotif->approval_code ?></td>
+									</tr>
+								<?php } ?>
+								<?php if (isset($datanotif->va_numbers)) { ?>
+									<tr>
+										<td class="font-weight-bold">Bank</td>
+										<td><?= $datanotif->va_numbers[0]->bank ?></td>
+									</tr>
+									<tr>
+										<td class="font-weight-bold">Va Number</td>
+										<td><?= $datanotif->va_numbers[0]->va_number ?></td>
+									</tr>
+
+								<?php } ?>
+								<tr>
+									<td class="font-weight-bold">Biaya</td>
+									<td><?= $datanotif->gross_amount ?></td>
+								</tr>
+								<tr>
+									<td class="font-weight-bold">Status Transaksi</td>
+									<td><?php if ($datanotif->transaction_status == 'pending') {
+											echo "Belum Dibayar";
+										} elseif ($datanotif->transaction_status == 'settlement') {
+											echo "Sudah Dibayar";
+										} else {
+											echo $datanotif->transaction_status;
+										} ?></td>
+								</tr>
+								<tr>
+									<td class="text-center" colspan="2">Informasi Selengkapnya Silahkan Cek Email Anda</td>
+								</tr>
+								<tr>
+									<td colspan="2" class="font-weight-bold text-center"><a href="<?= $query->url_panduan_pembayaran ?>">Panduan Pembayaran</a></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+								</tr>
+							</table>
 						</div>
 					</div>
 				</div>
