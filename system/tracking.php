@@ -62,12 +62,11 @@ $root .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAM
 	function simpanPosisi(posisi) {
 		const latitude = posisi.coords.latitude;
 		const longitude = posisi.coords.longitude;
-		var id = '<?php echo $id_sopir; ?>';
 
 		let data = {
 			'latitude': latitude,
 			'longitude': longitude,
-			'id': id
+			'id': <?php echo $_SESSION['id']; ?>
 		};
 
 		$.ajax({
