@@ -23,6 +23,7 @@ $midtransconfig::$is3ds = true;
 $query = $con->query("SELECT * FROM pemesanan JOIN biaya ON pemesanan.id_biaya = biaya.id_biaya WHERE kd_pemesanan='$id' ")->fetch_object();
 
 if (empty($query->id_pembayaran)) {
+	$datanotif = [];
 } else {
 	$datanotif = \Midtrans\Transaction::status($query->id_pembayaran);
 	if ($datanotif->transaction_status == "expire" || $datanotif->transaction_status == "deny" || $datanotif->transaction_status == "cancel" || $datanotif->transaction_status == "refund" || $datanotif->transaction_status == "chargeback" || $datanotif->transaction_status == "failure") {
@@ -341,8 +342,7 @@ $stmt->fetch();
 
 							</form>
 
-
-							<?php if (empty($query->id_pembayaran)) { ?>
+							<?php if (!empty($query->id_pembayaran)) { ?>
 								<table class="table table-sm my-4 mx-auto col-md-8">
 									<?php if (isset($datanotif->store)) { ?>
 										<tr>

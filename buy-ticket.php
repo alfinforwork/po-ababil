@@ -19,7 +19,7 @@ if (isset($_POST['beli'])) {
 	$waktu				= $_POST['waktu'];
 	$status				= 'belum dibayar';
 	$id_pelanggan		= $_SESSION['id'];
-	if ($jml_tiket == 0 or ($jml_tiket)) {
+	if ($jml_tiket == 0 or empty($jml_tiket)) {
 		echo '<script type="text/javascript">							
 							Swal.fire({
 								title: "Error!",
