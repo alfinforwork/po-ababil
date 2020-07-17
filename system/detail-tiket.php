@@ -342,65 +342,67 @@ $stmt->fetch();
 							</form>
 
 
-							<table class="table table-sm my-4 mx-auto col-md-8">
-								<?php if (isset($datanotif->store)) { ?>
-									<tr>
-										<td class="font-weight-bold">Tempat Pembayaran</td>
-										<td><?= $datanotif->store ?></td>
-									</tr>
-									<tr>
-										<td class="font-weight-bold">Kode Transaksi</td>
-										<td><?= $datanotif->payment_code ?></td>
-									</tr>
-								<?php } ?>
-								<?php if (isset($datanotif->payment_type)) { ?>
-									<tr>
-										<td class="font-weight-bold">Tempat Pembayaran</td>
-										<td><?= $datanotif->payment_type ?></td>
-									</tr>
-								<?php } ?>
-								<?php if (isset($datanotif->approval_code)) { ?>
-									<tr>
-										<td class="font-weight-bold">Approval Code</td>
-										<td><?= $datanotif->approval_code ?></td>
-									</tr>
-								<?php } ?>
-								<?php if (isset($datanotif->va_numbers)) { ?>
-									<tr>
-										<td class="font-weight-bold">Bank</td>
-										<td><?= $datanotif->va_numbers[0]->bank ?></td>
-									</tr>
-									<tr>
-										<td class="font-weight-bold">Va Number</td>
-										<td><?= $datanotif->va_numbers[0]->va_number ?></td>
-									</tr>
+							<?php if (empty($query->id_pembayaran)) { ?>
+								<table class="table table-sm my-4 mx-auto col-md-8">
+									<?php if (isset($datanotif->store)) { ?>
+										<tr>
+											<td class="font-weight-bold">Tempat Pembayaran</td>
+											<td><?= $datanotif->store ?></td>
+										</tr>
+										<tr>
+											<td class="font-weight-bold">Kode Transaksi</td>
+											<td><?= $datanotif->payment_code ?></td>
+										</tr>
+									<?php } ?>
+									<?php if (isset($datanotif->payment_type)) { ?>
+										<tr>
+											<td class="font-weight-bold">Tempat Pembayaran</td>
+											<td><?= $datanotif->payment_type ?></td>
+										</tr>
+									<?php } ?>
+									<?php if (isset($datanotif->approval_code)) { ?>
+										<tr>
+											<td class="font-weight-bold">Approval Code</td>
+											<td><?= $datanotif->approval_code ?></td>
+										</tr>
+									<?php } ?>
+									<?php if (isset($datanotif->va_numbers)) { ?>
+										<tr>
+											<td class="font-weight-bold">Bank</td>
+											<td><?= $datanotif->va_numbers[0]->bank ?></td>
+										</tr>
+										<tr>
+											<td class="font-weight-bold">Va Number</td>
+											<td><?= $datanotif->va_numbers[0]->va_number ?></td>
+										</tr>
 
-								<?php } ?>
-								<tr>
-									<td class="font-weight-bold">Biaya</td>
-									<td><?= $datanotif->gross_amount ?></td>
-								</tr>
-								<tr>
-									<td class="font-weight-bold">Status Transaksi</td>
-									<td><?php if ($datanotif->transaction_status == 'pending') {
-											echo "Belum Dibayar";
-										} elseif ($datanotif->transaction_status == 'settlement') {
-											echo "Sudah Dibayar";
-										} else {
-											echo $datanotif->transaction_status;
-										} ?></td>
-								</tr>
-								<tr>
-									<td class="text-center" colspan="2">Informasi Selengkapnya Silahkan Cek Email Anda</td>
-								</tr>
-								<tr>
-									<td colspan="2" class="font-weight-bold text-center"><a href="<?= $query->url_panduan_pembayaran ?>">Panduan Pembayaran</a></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-							</table>
+									<?php } ?>
+									<tr>
+										<td class="font-weight-bold">Biaya</td>
+										<td><?= $datanotif->gross_amount ?></td>
+									</tr>
+									<tr>
+										<td class="font-weight-bold">Status Transaksi</td>
+										<td><?php if ($datanotif->transaction_status == 'pending') {
+												echo "Belum Dibayar";
+											} elseif ($datanotif->transaction_status == 'settlement') {
+												echo "Sudah Dibayar";
+											} else {
+												echo $datanotif->transaction_status;
+											} ?></td>
+									</tr>
+									<tr>
+										<td class="text-center" colspan="2">Informasi Selengkapnya Silahkan Cek Email Anda</td>
+									</tr>
+									<tr>
+										<td colspan="2" class="font-weight-bold text-center"><a href="<?= $query->url_panduan_pembayaran ?>">Panduan Pembayaran</a></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+									</tr>
+								</table>
+							<?php } ?>
 						</div>
 					</div>
 				</div>
