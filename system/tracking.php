@@ -9,6 +9,10 @@ if ($_SESSION['level'] != 'sopir') {
 
 $id_sopir		= $_SESSION['id'];
 
+echo "<pre>";
+print_r($id_sopir);
+echo "</pre>";
+
 if (isset($_POST['simpan'])) {
 	$id_mobil		= $_POST['id_mobil'];
 	$mob 				= 0;
