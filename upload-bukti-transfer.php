@@ -371,7 +371,7 @@
 								<script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-KOObE-Oc9gK-mPxI"></script>
 								<!-- <script type="text/javascript" src="https://app.midtrans.com/snap/snap.js" data-client-key="Mid-client-ZwoGu0HMrx5kKXCB"></script> -->
 
-								<?php if (!isset($datanotif) || $datanotif->transaction_status == 'expired' || $datanotif->transaction_status == 'cancel') { ?>
+								<?php if (!isset($datanotif) || $datanotif->transaction_status == 'expire' || $datanotif->transaction_status == 'cancel') { ?>
 									<button id="pay-button" type="button" class="btn btn-sm btn-primary">Pilih Metode Pembayaran</button>
 								<?php } ?>
 								<script type="text/javascript">

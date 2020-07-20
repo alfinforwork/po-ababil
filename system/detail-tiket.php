@@ -27,7 +27,7 @@ if (empty($query->id_pembayaran)) {
 } else {
 	$datanotif = \Midtrans\Transaction::status($query->id_pembayaran);
 	if ($datanotif->transaction_status == "expire" || $datanotif->transaction_status == "deny" || $datanotif->transaction_status == "cancel" || $datanotif->transaction_status == "refund" || $datanotif->transaction_status == "chargeback" || $datanotif->transaction_status == "failure") {
-		$con->query("DELETE from pemesanan where kd_pemesanan='$kd_pembayaran' ");
+		$con->query("DELETE from pemesanan where kd_pemesanan='$id' ");
 		echo '<script type="text/javascript">							
 									Swal.fire({
 										title: "Gagal!",
