@@ -36,7 +36,7 @@ if (empty($query->id_pembayaran)) {
 										timer: 2000,
 										showConfirmButton: false
 									}).then(function(result) { 
-										window.location.href = "system/tiket.php";
+										window.location.href = "tiket.php";
 									});
 								</script>';
 	}
