@@ -3,13 +3,13 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 require_once('../../../connect.php');
 session_start();
-// $email = 'alfinforwork@gmail.com';
+
 $email = $_SESSION['email'];
 $query = $con->query("select * from pelanggan where email='$email' ");
 $data = $query->fetch_assoc();
 
 $chat_from = $data['pelanggan'];
-// $chat = 'nyapo';
+
 $chat = $_POST['chat-edit'];
 $query = $con->prepare("INSERT into chat_detail(id_chat_from,id_chat_to,chat) values('$chat_from','admin','$chat')");
 $query->execute();

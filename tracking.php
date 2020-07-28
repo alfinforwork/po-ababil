@@ -1,5 +1,5 @@
 	<?php
-		include_once('header.php');
+	include_once('header.php');
 	?>
 
 	<!-- tracking -->
@@ -25,7 +25,7 @@
 							</tr>
 						</thead>
 						<tbody>
-						<?php
+							<?php
 							$no = 1;
 							$stmt = $con->prepare('SELECT l.id_mobil, l.latitude, l.longitude, m.nopol, m.merk 
 														FROM lokasi l JOIN mobil m ON l.id_mobil = m.id_mobil');
@@ -35,13 +35,13 @@
 								$stmt->store_result() &&
 								$stmt->bind_result($id_mobil, $latitude, $longitude, $nopol, $merk)
 							) {
-								while ($stmt -> fetch()) {
+								while ($stmt->fetch()) {
 									echo '<tr>
-										<td scope="row">'.$no++.'</td>
-										<td>'.$nopol.'</td>
-										<td>'.$merk.'</td>
+										<td scope="row">' . $no++ . '</td>
+										<td>' . $nopol . '</td>
+										<td>' . $merk . '</td>
 										<td>
-											<a href="http://maps.google.com/maps?q='.$latitude.','.$longitude.'" target="_blank">Tracking</a>
+											<a href="http://maps.google.com/maps?q=' . $latitude . ',' . $longitude . '" target="_blank">Tracking</a>
 										</td>
 									</tr>';
 								}
@@ -53,7 +53,7 @@
 											<td></td>
 										</tr>';
 							}
-						?>
+							?>
 						</tbody>
 					</table>
 				</div>
@@ -62,7 +62,7 @@
 	</div>
 	<!-- //tracking -->
 
-    <!-- map -->
+	<!-- map -->
 	<!-- <section class="map">
 		<iframe
 			src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d423286.27404345275!2d-118.69191921441556!3d34.02016130939095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c75ddc27da13%3A0xe22fdf6f254608f4!2sLos+Angeles%2C+CA%2C+USA!5e0!3m2!1sen!2sin!4v1522474296007"
@@ -71,5 +71,5 @@
 	<!-- //map -->
 
 	<?php
-		include_once('footer.php');
+	include_once('footer.php');
 	?>
