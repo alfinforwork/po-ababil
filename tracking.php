@@ -48,7 +48,7 @@
 										<td>' . $nopol . '</td>
 										<td>' . $merk . '</td>
 										<td>
-											<a href="http://maps.google.com/maps?q=' . $latitude . ',' . $longitude . '" target="_blank">Tracking</a>
+											<a href="https://maps.google.com/maps?q=' . $latitude . ',' . $longitude . '" target="_blank">Tracking</a>
 										</td>
 									</tr>';
 								}
