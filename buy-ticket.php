@@ -19,29 +19,42 @@ if (isset($_POST['beli'])) {
 	$waktu				= $_POST['waktu'];
 	$status				= 'belum dibayar';
 	$id_pelanggan		= $_SESSION['id'];
-
-	$sql = "INSERT INTO pemesanan
-					(tgl_berangkat, jml_tiket, no_kursi, id_biaya, alamat_lengkap_dari, alamat_lengkap_ke, `status`, waktu, id_pelanggan) 
-					VALUES ('$tgl_berangkat', '$jml_tiket', '$no_kursi', '$id_biaya', '$alamat_lengkap_dari', '$alamat_lengkap_ke', '$status', '$waktu', '$id_pelanggan')";
-	if ($stmt = $con->query($sql)) {
-
-		echo '<script type="text/javascript">
-							window.location.href = "upload-bukti-transfer.php?id=' . $con->insert_id . '";
-						</script>';
-	} else {
-		// Something is wrong with the sql statement.
-		$message = "Transaksi belum berhasil!";
+	if ($jml_tiket == 0 or empty($jml_tiket)) {
 		echo '<script type="text/javascript">							
 							Swal.fire({
 								title: "Error!",
-								text: "' . $message . '",
+								text: "Silahkan Pilih Nomor Kursi",
 								type: "error",
 								timer: 2000,
 								showConfirmButton: false
 							}).then(function(result) { 
-								window.history.back();
+								window.location.href="buy-ticket.php"
 							});
 						</script>';
+	} else {
+		$sql = "INSERT INTO pemesanan
+						(tgl_berangkat, jml_tiket, no_kursi, id_biaya, alamat_lengkap_dari, alamat_lengkap_ke, `status`, waktu, id_pelanggan) 
+						VALUES ('$tgl_berangkat', '$jml_tiket', '$no_kursi', '$id_biaya', '$alamat_lengkap_dari', '$alamat_lengkap_ke', '$status', '$waktu', '$id_pelanggan')";
+		if ($stmt = $con->query($sql)) {
+
+			echo '<script type="text/javascript">
+								window.location.href = "upload-bukti-transfer.php?id=' . $con->insert_id . '";
+							</script>';
+		} else {
+			// Something is wrong with the sql statement.
+			$message = "Transaksi belum berhasil!";
+			echo '<script type="text/javascript">							
+								Swal.fire({
+									title: "Error!",
+									text: "' . $message . '",
+									type: "error",
+									timer: 2000,
+									showConfirmButton: false
+								}).then(function(result) { 
+									window.history.back();
+								});
+							</script>';
+		}
 	}
 }
 ?>

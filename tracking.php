@@ -27,6 +27,13 @@
 						<tbody>
 							<?php
 							$no = 1;
+							$q = $con->query("SELECT l.id_mobil, l.latitude, l.longitude, m.nopol, m.merk 
+														FROM lokasi l JOIN mobil m ON l.id_mobil = m.id_mobil");
+
+							echo "<pre>";
+							print_r($q->fetch_assoc);
+							echo "</pre>";
+
 							$stmt = $con->prepare('SELECT l.id_mobil, l.latitude, l.longitude, m.nopol, m.merk 
 														FROM lokasi l JOIN mobil m ON l.id_mobil = m.id_mobil');
 							if (

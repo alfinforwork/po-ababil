@@ -54,7 +54,7 @@ if (isset($_POST['simpan'])) {
 ?>
 
 <?php
-$root  = "http://" . $_SERVER['HTTP_HOST'];
+$root  = "https://" . $_SERVER['HTTP_HOST'];
 $root .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
 ?>
 
@@ -62,12 +62,11 @@ $root .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAM
 	function simpanPosisi(posisi) {
 		const latitude = posisi.coords.latitude;
 		const longitude = posisi.coords.longitude;
-		var id = '<?php echo $id_sopir; ?>';
 
 		let data = {
 			'latitude': latitude,
 			'longitude': longitude,
-			'id': id
+			'id': <?php echo $_SESSION['id']; ?>
 		};
 
 		$.ajax({
@@ -87,7 +86,7 @@ $root .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAM
 		setInterval(() => {
 			console.log('update');
 			navigator.geolocation.getCurrentPosition(simpanPosisi);
-		}, 500);
+		}, 2000);
 	});
 </script>
 

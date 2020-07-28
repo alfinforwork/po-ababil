@@ -42,6 +42,8 @@
 			"unit" => "day"
 		]
 	);
+
+
 	$midtransconfig = new \Midtrans\Config;
 	// $midtransconfig = new \Veritrans_Config;
 	$midtransSnap	= new \Midtrans\Snap;
@@ -68,6 +70,20 @@
 		}
 		if ($datanotif->transaction_status == "settlement" && $query->status == 'sudah bayar') {
 			header("Location:system/tiket.php");
+		}
+		if ($datanotif->transaction_status == "expire" || $datanotif->transaction_status == "deny" || $datanotif->transaction_status == "cancel" || $datanotif->transaction_status == "refund" || $datanotif->transaction_status == "chargeback" || $datanotif->transaction_status == "failure") {
+			$con->query("DELETE from pemesanan where kd_pemesanan='$kd_pembayaran' ");
+			echo '<script type="text/javascript">							
+									Swal.fire({
+										title: "Gagal!",
+										text: "Transaksi Telah ' . $datanotif->transaction_status . '",
+										type: "error",
+										timer: 2000,
+										showConfirmButton: false
+									}).then(function(result) { 
+										window.location.href = "system/tiket.php";
+									});
+								</script>';
 		}
 	}
 
@@ -355,7 +371,7 @@
 								<script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-KOObE-Oc9gK-mPxI"></script>
 								<!-- <script type="text/javascript" src="https://app.midtrans.com/snap/snap.js" data-client-key="Mid-client-ZwoGu0HMrx5kKXCB"></script> -->
 
-								<?php if (!isset($datanotif) || $datanotif->transaction_status == 'expired' || $datanotif->transaction_status == 'cancel') { ?>
+								<?php if (!isset($datanotif) || $datanotif->transaction_status == 'expire' || $datanotif->transaction_status == 'cancel') { ?>
 									<button id="pay-button" type="button" class="btn btn-sm btn-primary">Pilih Metode Pembayaran</button>
 								<?php } ?>
 								<script type="text/javascript">
@@ -369,14 +385,26 @@
 												console.log(result);
 												axios.post('<?= $root . "system/api_pembayaran.php?id=$kd_pembayaran" ?>', result).then(response => {
 													console.log(response);
-													alert('Success');
+													Swal.fire({
+														title: "Sukses!",
+														text: "Sukses",
+														type: "success",
+														timer: 2000,
+														showConfirmButton: false
+													});
 													window.location.href = "<?= $root . "upload-bukti-transfer.php?id=$kd_pembayaran" ?>"
 												});
 											},
 											onPending: function(result) {
 												console.log('pending');
 												axios.post('<?= $root . "system/api_pembayaran.php?id=$kd_pembayaran" ?>', result).then(response => {
-													alert('Pending');
+													Swal.fire({
+														title: "Pending!",
+														text: "Pending",
+														type: "success",
+														timer: 2000,
+														showConfirmButton: false
+													});
 													window.location.href = "<?= $root . "upload-bukti-transfer.php?id=$kd_pembayaran" ?>"
 												});
 												console.log(result);
@@ -384,7 +412,13 @@
 											onError: function(result) {
 												console.log('error');
 												console.log(result);
-												alert('Error');
+												Swal.fire({
+													title: "Error!",
+													text: "Error",
+													type: "error",
+													timer: 2000,
+													showConfirmButton: false
+												});
 											},
 											onClose: function() {
 												console.log('customer closed the popup without finishing the payment');
