@@ -21,7 +21,19 @@ $midtransconfig::$is3ds = true;
 
 
 $query = $con->query("SELECT * FROM pemesanan JOIN biaya ON pemesanan.id_biaya = biaya.id_biaya WHERE kd_pemesanan='$id' ")->fetch_object();
-
+if (empty($query)) {
+	echo '<script type="text/javascript">							
+									Swal.fire({
+										title: "Gagal!",
+										text: "Data Tidak Ditemukan",
+										type: "error",
+										timer: 2000,
+										showConfirmButton: false
+									}).then(function(result) { 
+										window.location.href = "tiket.php";
+									});
+								</script>';
+}
 if (empty($query->id_pembayaran)) {
 	$datanotif = [];
 } else {
