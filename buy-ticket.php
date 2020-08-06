@@ -6,7 +6,20 @@ if (!isset($_SESSION['loggedin'])) {
 	header('Location: login.php');
 	exit();
 }
-
+if ($_SESSION['level'] <> 'pelanggan') {
+	echo '<script type="text/javascript">							
+							Swal.fire({
+								title: "Error!",
+								text: "Sopir dan admin tidak boleh membeli ticket",
+								type: "error",
+								timer: 2000,
+								showConfirmButton: false
+							}).then(function(result) { 
+								window.location.href="index.php"
+							});
+						</script>';
+	exit();
+}
 if (isset($_POST['beli'])) {
 	$q = $con->query("SELECT id_biaya from biaya where id_lokasi_dari = $_POST[tmp_jemput] and id_lokasi_ke = $_POST[tmp_tujuan] ");
 	$id_biaya = $q->fetch_assoc();
