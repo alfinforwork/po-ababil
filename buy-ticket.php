@@ -135,7 +135,7 @@ if (isset($_POST['beli'])) {
 						<div class="col-lg-8 form-group pl-lg-2">
 							<select type="text" class="form-control" name="tmp_jemput" id="tmp_jemput" required="">
 								<option value="0">Pilih kota penjemputan</option>
-								<?php $query = $con->query('SELECT * from alamat where remove=1');
+								<?php $query = $con->query('SELECT * from alamat where remove=1 and active=1');
 								while ($key = $query->fetch_assoc()) { ?>
 									<option value="<?= $key['id_alamat'] ?>"><?= $key['nama_lokasi'] ?></option>
 								<?php } ?>

@@ -21,7 +21,8 @@ require_once('header.php');
                                         <tr class="text-center">
                                             <th>No</th>
                                             <th>Alamat</th>
-                                            <th style="width: 10%;">Action</th>
+                                            <th>Status</th>
+                                            <th style="width: 20%;">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -38,8 +39,14 @@ require_once('header.php');
                                             <tr>
                                                 <td class="text-center"><?= $nomor++ ?></td>
                                                 <td><?= $key['nama_lokasi'] ?></td>
+                                                <td class="text-center"><?= $key['active'] ? '<span class="badge badge-success">Aktif</span>' : '<span class="badge badge-danger">Non Aktif</span>' ?></td>
                                                 <td class="text-center">
                                                     <!-- <a href="ubah-biayaalamat.php?id=<?= $key['id_alamat'] ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a> -->
+                                                    <?php if ($key['active']) { ?>
+                                                        <a href="javascript:void(0)" onclick="mykliknonaktif('<?= $key['id_alamat'] ?>')">Non aktifkan</a>
+                                                    <?php } else { ?>
+                                                        <a href="javascript:void(0)" onclick="myklikaktif('<?= $key['id_alamat'] ?>')">Aktifkan</a>
+                                                    <?php } ?> |
                                                     <a href="javascript:void(0)" onclick="myklik('<?= $key['id_alamat'] ?>')">Hapus</a>
                                                 </td>
                                             </tr>
@@ -56,6 +63,20 @@ require_once('header.php');
     </div>
 
     <script>
+        function myklikaktif(id) {
+            var konfirmasi = confirm("Apakah anda yakin ingin mengaktifkan data ini?");
+            if (konfirmasi) {
+                window.location.href = 'alamat-aktif.php?id=' + id;
+            }
+        }
+
+        function mykliknonaktif(id) {
+            var konfirmasi = confirm("Apakah anda yakin ingin me nonaktifkan data ini?");
+            if (konfirmasi) {
+                window.location.href = 'alamat-nonaktif.php?id=' + id;
+            }
+        }
+
         function myklik(id) {
             var konfirmasi = confirm("Apakah anda yakin ingin menghapus data ini?");
             if (konfirmasi) {
