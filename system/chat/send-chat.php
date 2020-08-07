@@ -92,7 +92,7 @@ echo $root;
 
 //send the message, check for errors
 if (!$mail->send()) {
-    echo "Mailer Error: " . $mail->ErrorInfo;
+    echo json_encode($mail->ErrorInfo);
 } else {
-    echo "Message sent!";
+    echo json_encode(['message' => "Message sent!"]);
 }
