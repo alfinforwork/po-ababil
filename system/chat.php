@@ -124,6 +124,11 @@ include_once('./header.php');
                         dataType: "json",
                         success: function(res) {
                             console.log(res);
+                        },
+                        error(xhr, status, error) {
+                            console.log(xhr);
+                            console.log(status);
+                            console.log(error);
                         }
                     });
 
