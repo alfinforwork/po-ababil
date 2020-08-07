@@ -122,7 +122,9 @@ include_once('./header.php');
                         url: "<?= $root . 'chat/send-chat.php' ?>",
                         data: data,
                         dataType: "json",
-                        success: function(res) {}
+                        success: function(res) {
+                            console.log(res);
+                        }
                     });
 
                     $('#chat-edit').val('');

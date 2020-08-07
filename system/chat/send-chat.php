@@ -67,7 +67,7 @@ $mail->setFrom('cs@poababil.com', 'Admin PO Ababil Travel');
 $query = $con->query("select * from pelanggan where pelanggan='$chat_to' ");
 $data = $query->fetch_assoc();
 //Set who the message is to be sent to
-$mail->addAddress($chat_to);
+$mail->addAddress($data['email']);
 
 //Set the subject line
 $mail->Subject = 'Chat';
