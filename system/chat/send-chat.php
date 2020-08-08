@@ -61,7 +61,7 @@ $mail->SMTPAuth = true;
 $mail->Username = "csababil@yahoo.com";
 
 //Password to use for SMTP authentication
-$mail->Password = "tjdokovnqqhqiros";
+$mail->Password = "wzoeqdyyozrilxjz";
 
 //Set who the message is to be sent from
 $mail->setFrom('csababil@yahoo.com', 'Admin PO Ababil Travel');
