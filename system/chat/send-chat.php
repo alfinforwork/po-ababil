@@ -52,7 +52,7 @@ $mail->Host = 'smtp.mail.yahoo.com';
 $mail->Port = 465;
 
 //Set the encryption system to use - ssl (deprecated) or tls
-$mail->SMTPSecure = 'ssl';
+$mail->SMTPSecure = 'tls';
 
 //Whether to use SMTP authentication
 $mail->SMTPAuth = true;

@@ -59,7 +59,7 @@ $mail->Port = 465;
 // $mail->Port = 587;
 
 //Set the encryption system to use - ssl (deprecated) or tls
-$mail->SMTPSecure = 'ssl';
+$mail->SMTPSecure = 'tls';
 // $mail->SMTPSecure = 'tls';
 
 //Whether to use SMTP authentication
