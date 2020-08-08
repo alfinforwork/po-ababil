@@ -47,28 +47,28 @@
 					$mail->SMTPDebug = 0;
 
 					//Set the hostname of the mail server
-					$mail->Host = 'smtp.mail.yahoo.com';
+					$mail->Host = 'mail.poababil.com';
 					// use
 					// $mail->Host = gethostbyname('smtp.gmail.com');
 					// if your network does not support SMTP over IPv6
 
 					//Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
-					$mail->Port = 465;
+					$mail->Port = 587;
 
 					//Set the encryption system to use - ssl (deprecated) or tls
-					$mail->SMTPSecure = 'ssl';
+					$mail->SMTPSecure = 'tls';
 
 					//Whether to use SMTP authentication
 					$mail->SMTPAuth = true;
 
 					//Username to use for SMTP authentication - use full email address for gmail
-					$mail->Username = "csababil";
+					$mail->Username = "ababiladmin@poababil.com";
 
 					//Password to use for SMTP authentication
-					$mail->Password = "wzoeqdyyozrilxjz";
+					$mail->Password = "poababil2013";
 
 					//Set who the message is to be sent from
-					$mail->setFrom('csababil@yahoo.com', 'Admin PO Ababil Travel');
+					$mail->setFrom('ababiladmin@poababil.com', 'Admin PO Ababil Travel');
 
 					//Set who the message is to be sent to
 					$mail->addAddress($email, 'Pelanggan');

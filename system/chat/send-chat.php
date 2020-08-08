@@ -4,17 +4,12 @@ header("Access-Control-Allow-Headers: *");
 require_once('../../connect.php');
 $chat_to = $_POST['chat-from'];
 $chat = $_POST['chat-edit'];
-
-function fungsi($to = null, $chat = null)
-{
-    require_once('../../connect.php');
-    $query = $con->prepare("INSERT into chat_detail(id_chat_from,id_chat_to,chat) values('admin','$to','$chat')");
-    $query->execute();
-    $query = $con->prepare("UPDATE chat set is_baca_admin = 0, created_at=date('Y-m-d H:i:s') where username = '$to' ");
-    $query->execute();
-    $query = $con->prepare("UPDATE chat set is_baca_user = 1, created_at=date('Y-m-d H:i:s') where username = '$to'");
-    $query->execute();
-}
+$query = $con->prepare("INSERT into chat_detail(id_chat_from,id_chat_to,chat) values('admin','$chat_to','$chat')");
+$query->execute();
+$query = $con->prepare("UPDATE chat set is_baca_admin = 0, created_at=date('Y-m-d H:i:s') where username = '$chat_to' ");
+$query->execute();
+$query = $con->prepare("UPDATE chat set is_baca_user = 1, created_at=date('Y-m-d H:i:s') where username = '$chat_to'");
+$query->execute();
 
 
 
@@ -36,14 +31,14 @@ $mail->isHTML(true);
 // 0 = off (for production use)
 // 1 = client messages
 // 2 = client and server messages
-$mail->SMTPDebug = 2;
+$mail->SMTPDebug = 0;
 
 //Ask for HTML-friendly debug output
 $mail->Debugoutput = 'html';
 
 //Set the hostname of the mail server
 // $mail->Host = 'smtp.gmail.com';
-$mail->Host = 'smtp.mail.yahoo.com';
+$mail->Host = 'mail.poababil.com';
 // use
 // $mail->Host = gethostbyname('smtp.gmail.com');
 // if your network does not support SMTP over IPv6
@@ -58,13 +53,13 @@ $mail->SMTPSecure = 'ssl';
 $mail->SMTPAuth = true;
 
 //Username to use for SMTP authentication - use full email address for gmail
-$mail->Username = "csababil@yahoo.com";
+$mail->Username = "ababiladmin@poababil.com";
 
 //Password to use for SMTP authentication
-$mail->Password = "wzoeqdyyozrilxjz";
+$mail->Password = "poababil2013";
 
 //Set who the message is to be sent from
-$mail->setFrom('csababil@yahoo.com', 'Admin PO Ababil Travel');
+$mail->setFrom('ababiladmin@poababil.com', 'Admin PO Ababil Travel');
 
 //Set an alternative reply-to address
 // $mail->addReplyTo('mzq100m@gmail.com', 'First Last');
@@ -99,6 +94,5 @@ echo $root;
 if (!$mail->send()) {
     echo json_encode($mail->ErrorInfo);
 } else {
-    fungsi($chat_to, $chat);
     echo json_encode(['message' => "Message sent!"]);
 }
