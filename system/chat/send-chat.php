@@ -53,13 +53,13 @@ $mail->SMTPSecure = 'ssl';
 $mail->SMTPAuth = true;
 
 //Username to use for SMTP authentication - use full email address for gmail
-$mail->Username = "cs@poababil.com";
+$mail->Username = "ababiladmin@poababil.com";
 
 //Password to use for SMTP authentication
-$mail->Password = "poababil";
+$mail->Password = "poababil2013";
 
 //Set who the message is to be sent from
-$mail->setFrom('cs@poababil.com', 'Admin PO Ababil Travel');
+$mail->setFrom('ababiladmin@poababil.com', 'Admin PO Ababil Travel');
 
 //Set an alternative reply-to address
 // $mail->addReplyTo('mzq100m@gmail.com', 'First Last');

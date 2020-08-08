@@ -64,11 +64,11 @@ $mail->SMTPAuth = true;
 
 //Username to use for SMTP authentication - use full email address for gmail
 // $mail->Username = "ababil.transs@gmail.com";
-$mail->Username = "cs@poababil.com";
+$mail->Username = "ababiladmin@poababil.com";
 
 //Password to use for SMTP authentication
 // $mail->Password = "ababiltrans2013";
-$mail->Password = "poababil";
+$mail->Password = "poababil2013";
 
 //Set who the message is to be sent from
 $mail->setFrom($email, $data['pelanggan']);
@@ -77,7 +77,7 @@ $mail->setFrom($email, $data['pelanggan']);
 // $mail->addReplyTo('mzq100m@gmail.com', 'First Last');
 
 //Set who the message is to be sent to
-$mail->addAddress('cs@poababil.com', 'Admin PO Ababil Travel');
+$mail->addAddress('ababiladmin@poababil.com', 'Admin PO Ababil Travel');
 
 //Set the subject line
 $mail->Subject = 'Chat';
