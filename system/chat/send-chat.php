@@ -49,10 +49,10 @@ $mail->Host = 'smtp.mail.yahoo.com';
 // if your network does not support SMTP over IPv6
 
 //Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
-$mail->Port = 587;
+$mail->Port = 465;
 
 //Set the encryption system to use - ssl (deprecated) or tls
-$mail->SMTPSecure = 'tls';
+$mail->SMTPSecure = 'ssl';
 
 //Whether to use SMTP authentication
 $mail->SMTPAuth = true;
@@ -61,7 +61,7 @@ $mail->SMTPAuth = true;
 $mail->Username = "csababil@yahoo.com";
 
 //Password to use for SMTP authentication
-$mail->Password = "bojongbogo2013";
+$mail->Password = "tjdokovnqqhqiros";
 
 //Set who the message is to be sent from
 $mail->setFrom('csababil@yahoo.com', 'Admin PO Ababil Travel');

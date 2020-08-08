@@ -56,16 +56,16 @@
 					$mail->Port = 465;
 
 					//Set the encryption system to use - ssl (deprecated) or tls
-					$mail->SMTPSecure = 'tls';
+					$mail->SMTPSecure = 'ssl';
 
 					//Whether to use SMTP authentication
 					$mail->SMTPAuth = true;
 
 					//Username to use for SMTP authentication - use full email address for gmail
-					$mail->Username = "csababil@yahoo.com";
+					$mail->Username = "csababil";
 
 					//Password to use for SMTP authentication
-					$mail->Password = "bojongbogo2013";
+					$mail->Password = "tjdokovnqqhqiros";
 
 					//Set who the message is to be sent from
 					$mail->setFrom('csababil@yahoo.com', 'Admin PO Ababil Travel');
