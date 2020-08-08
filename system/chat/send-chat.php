@@ -4,12 +4,17 @@ header("Access-Control-Allow-Headers: *");
 require_once('../../connect.php');
 $chat_to = $_POST['chat-from'];
 $chat = $_POST['chat-edit'];
-$query = $con->prepare("INSERT into chat_detail(id_chat_from,id_chat_to,chat) values('admin','$chat_to','$chat')");
-$query->execute();
-$query = $con->prepare("UPDATE chat set is_baca_admin = 0, created_at=date('Y-m-d H:i:s') where username = '$chat_to' ");
-$query->execute();
-$query = $con->prepare("UPDATE chat set is_baca_user = 1, created_at=date('Y-m-d H:i:s') where username = '$chat_to'");
-$query->execute();
+
+function fungsi($to = null, $chat = null)
+{
+    require_once('../../connect.php');
+    $query = $con->prepare("INSERT into chat_detail(id_chat_from,id_chat_to,chat) values('admin','$to','$chat')");
+    $query->execute();
+    $query = $con->prepare("UPDATE chat set is_baca_admin = 0, created_at=date('Y-m-d H:i:s') where username = '$to' ");
+    $query->execute();
+    $query = $con->prepare("UPDATE chat set is_baca_user = 1, created_at=date('Y-m-d H:i:s') where username = '$to'");
+    $query->execute();
+}
 
 
 
@@ -38,7 +43,7 @@ $mail->Debugoutput = 'html';
 
 //Set the hostname of the mail server
 // $mail->Host = 'smtp.gmail.com';
-$mail->Host = 'mail.poababil.com';
+$mail->Host = 'smtp.mail.yahoo.com';
 // use
 // $mail->Host = gethostbyname('smtp.gmail.com');
 // if your network does not support SMTP over IPv6
@@ -53,13 +58,13 @@ $mail->SMTPSecure = 'ssl';
 $mail->SMTPAuth = true;
 
 //Username to use for SMTP authentication - use full email address for gmail
-$mail->Username = "ababiladmin@poababil.com";
+$mail->Username = "csababil@yahoo.com";
 
 //Password to use for SMTP authentication
-$mail->Password = "poababil2013";
+$mail->Password = "bojongbogo2013";
 
 //Set who the message is to be sent from
-$mail->setFrom('ababiladmin@poababil.com', 'Admin PO Ababil Travel');
+$mail->setFrom('csababil@yahoo.com', 'Admin PO Ababil Travel');
 
 //Set an alternative reply-to address
 // $mail->addReplyTo('mzq100m@gmail.com', 'First Last');
@@ -94,5 +99,6 @@ echo $root;
 if (!$mail->send()) {
     echo json_encode($mail->ErrorInfo);
 } else {
+    fungsi($chat_to, $chat);
     echo json_encode(['message' => "Message sent!"]);
 }

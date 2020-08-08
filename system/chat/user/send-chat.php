@@ -1,22 +1,25 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
-require_once('../../../connect.php');
 session_start();
 
 $email = $_SESSION['email'];
-$query = $con->query("select * from pelanggan where email='$email' ");
-$data = $query->fetch_assoc();
+function fungsi($emailuser = null)
+{
+    require_once('../../../connect.php');
+    $query = $con->query("select * from pelanggan where email='$emailuser' ");
+    $data = $query->fetch_assoc();
 
-$chat_from = $data['pelanggan'];
+    $chat_from = $data['pelanggan'];
 
-$chat = $_POST['chat-edit'];
-$query = $con->prepare("INSERT into chat_detail(id_chat_from,id_chat_to,chat) values('$chat_from','admin','$chat')");
-$query->execute();
-$query = $con->prepare("UPDATE chat set is_baca_admin = 1, created_at=date('Y-m-d H:i:s') where username = '$chat_from' ");
-$query->execute();
-$query = $con->prepare("UPDATE chat set is_baca_user = 0, created_at=date('Y-m-d H:i:s') where username = '$chat_from'");
-$query->execute();
+    $chat = $_POST['chat-edit'];
+    $query = $con->prepare("INSERT into chat_detail(id_chat_from,id_chat_to,chat) values('$chat_from','admin','$chat')");
+    $query->execute();
+    $query = $con->prepare("UPDATE chat set is_baca_admin = 1, created_at=date('Y-m-d H:i:s') where username = '$chat_from' ");
+    $query->execute();
+    $query = $con->prepare("UPDATE chat set is_baca_user = 0, created_at=date('Y-m-d H:i:s') where username = '$chat_from'");
+    $query->execute();
+}
 
 
 
@@ -46,7 +49,7 @@ $mail->SMTPDebug = 2;
 $mail->Debugoutput = 'html';
 
 //Set the hostname of the mail server
-$mail->Host = 'mail.poababil.com';
+$mail->Host = 'smtp.mail.yahoo.com';
 // use
 // $mail->Host = gethostbyname('smtp.gmail.com');
 // if your network does not support SMTP over IPv6
@@ -64,11 +67,11 @@ $mail->SMTPAuth = true;
 
 //Username to use for SMTP authentication - use full email address for gmail
 // $mail->Username = "ababil.transs@gmail.com";
-$mail->Username = "ababiladmin@poababil.com";
+$mail->Username = "csababil@yahoo.com";
 
 //Password to use for SMTP authentication
 // $mail->Password = "ababiltrans2013";
-$mail->Password = "poababil2013";
+$mail->Password = "bojongbogo2013";
 
 //Set who the message is to be sent from
 $mail->setFrom($email, $data['pelanggan']);
@@ -77,7 +80,7 @@ $mail->setFrom($email, $data['pelanggan']);
 // $mail->addReplyTo('mzq100m@gmail.com', 'First Last');
 
 //Set who the message is to be sent to
-$mail->addAddress('ababiladmin@poababil.com', 'Admin PO Ababil Travel');
+$mail->addAddress('csababil@yahoo.com', 'Admin PO Ababil Travel');
 
 //Set the subject line
 $mail->Subject = 'Chat';
@@ -102,7 +105,8 @@ $mail->AltBody = '';
 
 //send the message, check for errors
 if (!$mail->send()) {
-    echo "Mailer Error: " . $mail->ErrorInfo;
+    echo $mail->ErrorInfo;
 } else {
-    echo "Message sent!";
+    fungsi($email);
+    echo json_encode(['status' => 'berhasil']);
 }
