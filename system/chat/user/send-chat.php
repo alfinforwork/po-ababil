@@ -87,7 +87,7 @@ $mail->Subject = 'PO Ababil Chat';
 
 $root  = "http://" . $_SERVER['HTTP_HOST'];
 $root .= str_replace('chat/user/' . basename($_SERVER['SCRIPT_NAME']), "chat.php", $_SERVER['SCRIPT_NAME']);
-$mail->Body = 'chat : ' . $chat . '<br><a href="' . $root . '">Klik disini untuk membalas chat</a>';
+$mail->Body = 'Pesan masuk : ' . $chat . '<br><a href="' . $root . '">Klik disini untuk membalas chat</a>';
 //Read an HTML message body from an external file, convert referenced images to embedded,
 //convert HTML into a basic plain-text alternative body
 // $mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
