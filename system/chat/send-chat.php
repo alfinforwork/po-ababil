@@ -56,7 +56,7 @@ $mail->SMTPAuth = true;
 $mail->Username = "ababiladmin@poababil.com";
 
 //Password to use for SMTP authentication
-$mail->Password = "poababil2013";
+$mail->Password = "MksNtxB0ktX0";
 
 //Set who the message is to be sent from
 $mail->setFrom('ababiladmin@poababil.com', 'Admin PO Ababil Travel');
@@ -70,7 +70,7 @@ $data = $query->fetch_assoc();
 $mail->addAddress($data['email']);
 
 //Set the subject line
-$mail->Subject = 'Chat';
+$mail->Subject = 'PO Ababil Chat';
 
 // Mail Body
 
