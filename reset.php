@@ -76,13 +76,13 @@
 					//Set the subject line
 					$mail->Subject = 'Reset Password Ababil Travel';
 
-
+					$root  = "https://$_SERVER[HTTP_HOST]";
 					//Read an HTML message body from an external file, convert referenced images to embedded,
 					//convert HTML into a basic plain-text alternative body						
-					$mail->Body = 'Silahkan klik link berikut untuk reset password : 
-http://localhost/po-ababil/confirm-reset.php?key=' . $key . '
+					$mail->Body = "Silahkan klik link berikut untuk reset password : 
+<a href='$root/po-ababil/confirm-reset.php?key=$key'>$root/po-ababil/confirm-reset.php?key=$key</a>
 
-Link ini belaku sampai : ' . $expDate;
+Link ini belaku sampai : $expDate";
 
 					//Replace the plain text body with one created manually
 					$mail->AltBody = '';
