@@ -82,7 +82,7 @@
 					//Read an HTML message body from an external file, convert referenced images to embedded,
 					//convert HTML into a basic plain-text alternative body						
 					$mail->Body = "Silahkan klik link berikut untuk reset password : 
-$root/po-ababil/confirm-reset.php?key=$key
+$root/confirm-reset.php?key=$key
 
 Link ini belaku sampai : $expDate";
 
