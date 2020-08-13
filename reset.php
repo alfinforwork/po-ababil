@@ -26,7 +26,7 @@
 			if ($stmt->num_rows > 0) {
 				$expFormat 	= mktime(date("H"), date("i"), date("s"), date("m"), date("d") + 1, date("Y"));
 				$expDate 	= date("Y-m-d H:i:s", $expFormat);
-				$key 			= password_hash($email, PASSWORD_DEFAULT);
+				$key 			= hash('sha256', rand() . $email);
 
 				if ($stmt = $con->prepare("INSERT INTO password_reset (`email`, `key`, `expired`) VALUES (?, ?, ?)")) {
 					$stmt->bind_param('sss', $email, $key, $expDate);
