@@ -31,6 +31,7 @@ require_once('./connect.php');
 	<!-- <link href="css/font-awesome.min.css" rel="stylesheet"> -->
 	<!-- Font-Awesome-Icons-CSS -->
 	<!-- //Custom-Files -->
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.js"></script>
