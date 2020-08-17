@@ -35,7 +35,7 @@
     				<ul class="footer-text mt-4 top-right-info">
     					<li class="facebook-w3">
     						<a href="#facebbok">
-    							<span class="fa fa-facebook-f"></span>
+    							<span class="fa fa-facebook"></span>
     						</a>
     					</li>
     					<li class="twitter-w3">
