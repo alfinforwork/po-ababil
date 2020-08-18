@@ -160,7 +160,7 @@ if (isset($_POST['beli'])) {
 							<p class="buy">Alamat spesifik penjemputan</p>
 						</div>
 						<div class="col-lg-8 form-group pl-lg-2">
-							<input type="text" class="form-control" name="alamatpenjemputan">
+							<input type="text" class="form-control" name="alamatpenjemputan" required="">
 						</div>
 					</div>
 					<div class="row">
@@ -178,7 +178,7 @@ if (isset($_POST['beli'])) {
 							<p class="buy">Alamat spesifik tujuan</p>
 						</div>
 						<div class="col-lg-8 form-group pl-lg-2">
-							<input type="text" class="form-control" name="alamattujuan">
+							<input type="text" class="form-control" name="alamattujuan" required="">
 						</div>
 					</div>
 					<div class="row">
@@ -194,7 +194,7 @@ if (isset($_POST['beli'])) {
 							<p class="buy">Waktu Berangkat</p>
 						</div>
 						<div class="col-lg-4 form-group pl-lg-2">
-							<select name="waktu" class="form-control" id="waktu">
+							<select name="waktu" class="form-control" id="waktu" required="">
 								<option value="pagi">Pagi</option>
 								<option value="sore">Sore</option>
 							</select>
