@@ -64,7 +64,7 @@
 											<th>No</th>
 											<th>Sopir</th>
 											<th>No HP</th>
-											<th>Email</th>
+											<th>Alamat</th>
 											<th>Action</th>
 										</tr>
 									</thead>
