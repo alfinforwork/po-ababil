@@ -341,7 +341,7 @@ $stmt->fetch();
 											<button type="submit" name="editTiket" class="btn btn-primary">Save</button>
 											<a href="tiket.php" class="btn btn-secondary">Back</a>';
 											if (empty($bukti_transfer)) {
-												echo " Belum upload bukti transfer";
+												echo " tiket";
 											} else {
 												echo '
 												<a href="../' . $bukti_transfer . '" target="_blank" class="btn btn-danger">Cek bukti transfer</a>';
