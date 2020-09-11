@@ -4,7 +4,7 @@ require_once('header.php');
 
 $id = $_GET['id'];
 
-if (isset($_POST['updateMobil'])){
+if (isset($_POST['updateMobil'])) {
 	$nopol		= $_POST['nopol'];
 	$merk			= $_POST['merk'];
 	$ket_mobil	= $_POST['ket_mobil'];
@@ -12,14 +12,14 @@ if (isset($_POST['updateMobil'])){
 	// Mengecek apakah ada masukkan nopol dan merk
 	if (!isset($nopol, $merk)) {
 		// Menampilkan pesan tidak boleh kosong.
-		die ('Silahkan isi nopol dan merk!');
+		die('Silahkan isi nopol dan merk!');
 	}
 	// Memastikan tidak ada nopol atau input yang kosong.
 	if (empty($nopol) || empty($merk)) {
 		// Nopol atau merk masih kosong.
-		die ('Nopol atau merk masih kosong');
-	}	
-	
+		die('Nopol atau merk masih kosong');
+	}
+
 	if ($stmt = $con->prepare('UPDATE mobil SET nopol=?, merk=?, ket_mobil=? WHERE id_mobil=?')) {
 		$stmt->bind_param('sssi', $nopol, $merk, $ket_mobil, $id);
 		$stmt->execute();
@@ -27,7 +27,7 @@ if (isset($_POST['updateMobil'])){
 		echo '<script type="text/javascript">							
 						Swal.fire({
 							title: "Sukses!",
-							text: "'.$message.'",
+							text: "' . $message . '",
 							type: "success",
 							timer: 2000,
 							showConfirmButton: false
@@ -42,7 +42,7 @@ if (isset($_POST['updateMobil'])){
 		echo '<script type="text/javascript">							
 						Swal.fire({
 							title: "Gagal!",
-							text: "'.$message.'",
+							text: "' . $message . '",
 							type: "error",
 							timer: 2000,
 							showConfirmButton: false
@@ -79,28 +79,28 @@ $stmt->fetch();
 								<div class="form-group row">
 									<label class="col-md-3 form-control-label">Nomor Polisi</label>
 									<div class="col-md-3">
-										<input type="text" name="nopol" class="form-control" value="<?=$nopol;?>" required>
+										<input type="text" name="nopol" class="form-control" value="<?= $nopol; ?>" required <?= ($_SESSION['level'] == 'admin') ? '' : 'readonly' ?>>
 									</div>
 								</div>
 								<div class="line"></div>
 								<div class="form-group row">
 									<label class="col-md-3 form-control-label">Merk / Type</label>
 									<div class="col-md-6">
-										<input type="text" name="merk" class="form-control" value="<?=$merk;?>" required>
+										<input type="text" name="merk" class="form-control" value="<?= $merk; ?>" required <?= ($_SESSION['level'] == 'admin') ? '' : 'readonly' ?>>
 									</div>
 								</div>
 								<div class="line"></div>
 								<div class="form-group row">
 									<label class="col-md-3 form-control-label">Keterangan</label>
 									<div class="col-md-6">
-										<input type="text" name="ket_mobil" class="form-control" value="<?=$ket_mobil;?>">
+										<input type="text" name="ket_mobil" class="form-control" value="<?= $ket_mobil; ?>" <?= ($_SESSION['level'] == 'admin') ? '' : 'readonly' ?>>
 									</div>
 								</div>
 								<div class="line"></div>
 								<div class="form-group row">
 									<div class="col-md-9 ml-auto">
 										<?php
-										if ($_SESSION['level'] == 'admin'){
+										if ($_SESSION['level'] == 'admin') {
 											echo '<button type="submit" name="updateMobil" class="btn btn-primary">Edit</button>';
 										}
 										?>
