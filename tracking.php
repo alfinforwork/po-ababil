@@ -30,17 +30,13 @@
 							$q = $con->query("SELECT l.id_mobil, l.latitude, l.longitude, m.nopol, m.merk 
 														FROM lokasi l JOIN mobil m ON l.id_mobil = m.id_mobil");
 
-							echo "<pre>";
-							print_r($q->fetch_assoc);
-							echo "</pre>";
-
-							$stmt = $con->prepare('SELECT l.id_mobil, l.latitude, l.longitude, m.nopol, m.merk 
+							$stmt = $con->prepare('SELECT l.id_sopir, l.id_mobil, l.latitude, l.longitude, m.nopol, m.merk 
 														FROM lokasi l JOIN mobil m ON l.id_mobil = m.id_mobil');
 							if (
 								$stmt &&
 								$stmt->execute() &&
 								$stmt->store_result() &&
-								$stmt->bind_result($id_mobil, $latitude, $longitude, $nopol, $merk)
+								$stmt->bind_result($id_sopir, $id_mobil, $latitude, $longitude, $nopol, $merk)
 							) {
 								while ($stmt->fetch()) {
 									echo '<tr>
@@ -48,7 +44,7 @@
 										<td>' . $nopol . '</td>
 										<td>' . $merk . '</td>
 										<td>
-											<a href="https://maps.google.com/maps?q=' . $latitude . ',' . $longitude . '" target="_blank">Tracking</a>
+											<a href="realtime.php?id_sopir=' . $id_sopir . '&id_mobil=' . $id_mobil . '" target="_blank">Tracking</a>
 										</td>
 									</tr>';
 								}
