@@ -24,7 +24,7 @@ $data = $q->fetch_object();
 
 <body>
     <h1 style="text-align: center;">Tracking map</h1>
-    <p style="text-align: center;"><?= "$data->merk | $data->ket_mobil" ?></p>
+    <p style="text-align: center;"><?= "$data->nopol | $data->merk | $data->ket_mobil" ?></p>
     <div id='map' style='width: 80%; height: 80vh; margin: auto;'></div>
     <script>
         navigator.geolocation.getCurrentPosition(function(position) {
