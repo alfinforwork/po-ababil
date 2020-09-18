@@ -2,7 +2,7 @@
 require_once('./connect.php');
 $id_sopir = $_GET['id_sopir'];
 $id_mobil = $_GET['id_mobil'];
-$q = $con->query("SELECT * from lokasi where id_sopir='$id_sopir' and id_mobil='$id_mobil' limit 1 ");
+$q = $con->query("SELECT * from lokasi join mobil on lokasi.id_mobil = mobil.id_mobil  where lokasi.id_sopir='$id_sopir' and lokasi.id_mobil='$id_mobil' limit 1 ");
 $data = $q->fetch_object();
 ?>
 
@@ -24,6 +24,7 @@ $data = $q->fetch_object();
 
 <body>
     <h1 style="text-align: center;">Tracking map</h1>
+    <p style="text-align: center;"><?= "$data->merk | $data->ket_mobil" ?></p>
     <div id='map' style='width: 80%; height: 80vh; margin: auto;'></div>
     <script>
         navigator.geolocation.getCurrentPosition(function(position) {
